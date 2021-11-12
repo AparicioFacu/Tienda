@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Color = System.Drawing.Color;
+using Datos;
+using Presentador.Presentadores;
+using Dominio;
 
 namespace Presentador
 {
@@ -18,10 +22,23 @@ namespace Presentador
             InitializeComponent();
         }
         /*#################################Logica Login###########################################*/
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Ingresar();
+        }
+        public void Ingresar()
+        {
+
+            PresentadorLogin _presentador = new PresentadorLogin();
+            Usuario user = new Usuario();
+            user.legajo = txtUsuario.Text;
+            user.contraseña = txtContraseña.Text;                      
+            _presentador.iniciarSesion(user);
+            this.Hide();
+            
+        }
 
 
-        
-        
         /*#############################Edicion Login#############################################*/
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -91,5 +108,7 @@ namespace Presentador
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        
     }
 }
