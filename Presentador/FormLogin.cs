@@ -29,11 +29,8 @@ namespace Presentador
         public void Ingresar()
         {
 
-            PresentadorLogin _presentador = new PresentadorLogin();
-            Usuario user = new Usuario();
-            user.legajo = txtUsuario.Text;
-            user.contraseña = txtContraseña.Text;                      
-            _presentador.iniciarSesion(user);
+            PresentadorLogin _presentador = new PresentadorLogin();                                 
+            _presentador.iniciarSesion(txtUsuario.Text, txtContraseña.Text);
             this.Hide();
             
         }

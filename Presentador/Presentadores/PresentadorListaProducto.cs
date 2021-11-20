@@ -55,8 +55,7 @@ namespace Presentador.Presentadores
                                     Costo = productos.Costo,
                                     PorcentajeIva = productos.PorcentajeIva,
                                     MargenGanacia = productos.MargenGanacia,
-                                    marcaDescripcion = productos.Marca.descripcion,
-                                    rubroDescripcion = productos.Rubro.descripcion,
+                                    
                                 }
                ).ToList();
         }

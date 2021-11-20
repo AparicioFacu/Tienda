@@ -46,6 +46,8 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="CondicionTributaria.cs" />
+    <Compile Include="Empleado.cs" />
+    <Compile Include="LineaVenta.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Marca.cs" />
     <Compile Include="Producto.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Stock.cs" />
     <Compile Include="Sucursal.cs" />
     <Compile Include="Talle.cs" />
+    <Compile Include="TipoTalle.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Venta.cs" />
   </ItemGroup>

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    class Venta
+    public class Venta
     {
+        public DateTime fecha { get; set; }
+        public double subTotal { get; set; }
+        public string total { get; set; }
+         
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    enum CondicionTributaria
-    {
+    public class CondicionTributaria
+    {   
+        public string descripcion { get; set; }
     }
 }

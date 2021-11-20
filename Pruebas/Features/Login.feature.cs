@@ -139,17 +139,17 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("iniciar sesión o no iniciar sesión en la aplicación: 45412")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("iniciar sesión o no iniciar sesión en la aplicación: chino")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Login")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "45412")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:usuario", "45412")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:contraseña", "123")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "chino")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:usuario", "chino")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:contraseña", "12345678")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:respuesta", "LoginExitoso")]
-        public virtual void IniciarSesionONoIniciarSesionEnLaAplicacion_45412()
+        public virtual void IniciarSesionONoIniciarSesionEnLaAplicacion_Chino()
         {
 #line 5
-this.IniciarSesionONoIniciarSesionEnLaAplicacion("45412", "123", "LoginExitoso", ((string[])(null)));
+this.IniciarSesionONoIniciarSesionEnLaAplicacion("chino", "12345678", "LoginExitoso", ((string[])(null)));
 #line hidden
         }
         

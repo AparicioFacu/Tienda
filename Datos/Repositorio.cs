@@ -24,10 +24,8 @@ namespace Datos
             {
                 new Usuario()
                 {
-                    legajo="45412",
-                    contraseña="123",
-                    email="chino@gmail.com",
-                    nombre="Facu",
+                    nombre="chino",
+                    contraseña="12345678",                   
                     rol="admin"
                 }
             };
@@ -166,8 +164,8 @@ namespace Datos
                     Costo = 1000,
                     PorcentajeIva = 0.21,
                     MargenGanacia = 0.20,
-                    Marca = _marcas[0],
-                    Rubro = _rubros[0],
+                    //Marca = _marcas[0],
+                    //Rubro = _rubros[0],
                 },
                 new Producto()
                 {
@@ -176,8 +174,8 @@ namespace Datos
                     Costo = 1000,
                     PorcentajeIva = 0.21,
                     MargenGanacia = 0.20,
-                    Marca = _marcas[0],
-                    Rubro = _rubros[0],
+                    //Marca = _marcas[0],
+                    //Rubro = _rubros[0],
                 },
                 new Producto()
                 {
@@ -186,8 +184,8 @@ namespace Datos
                     Costo = 1000,
                     PorcentajeIva = 0.21,
                     MargenGanacia = 0.20,
-                    Marca = _marcas[0],
-                    Rubro = _rubros[0],
+                    //Marca = _marcas[0],
+                    //Rubro = _rubros[0],
                 }
             };
             _stocks = new List<Stock>()
@@ -240,16 +238,27 @@ namespace Datos
         {
             throw new NotImplementedException();
         }
-        public string IngresarUsuario(string legajo, string contraseña)
+        public string IngresarUsuario(string nombre, string contraseña)
         {
             foreach(var usuario in _usuarios)
             {
-                if(legajo == usuario.legajo && contraseña == usuario.contraseña)
+                if(nombre == usuario.nombre && contraseña == usuario.contraseña)
+                {
+                    return "Login Exitoso";
+                }
+            }
+            return "Login no exitoso";
+        }
+        public string rolUsuario(string nombre, string contraseña)
+        {
+            foreach (var usuario in _usuarios)
+            {
+                if (nombre == usuario.nombre && contraseña == usuario.contraseña)
                 {
                     return usuario.rol;
                 }
             }
-            return null;
+            return "usuario no encontrado";
         }
    
     }

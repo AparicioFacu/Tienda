@@ -12,18 +12,17 @@ namespace PruebasUnitarias
     {
         [TestMethod]
         
-        public void nuevoProducto()
+        public void crearNuevoProducto()
         {
-            Rubro rubro = new Rubro();
-            Marca marca = new Marca();
-            Producto producto = new Producto();
-            producto.CodigoProducto = 100;
-            producto.Descripcion = "Remera";
-            producto.Costo = 1000;
-            producto.PorcentajeIva = 0.21;
-            producto.MargenGanacia = 0.20;
-            producto.Marca = marca;
-            producto.Rubro = rubro;
+
+            Producto producto = new Producto
+            {
+                CodigoProducto = 100,
+                Descripcion = "Remera Mangas Corta",
+                Costo = 1000,
+                PorcentajeIva = 0.21,
+                MargenGanacia = 0.20
+            };
 
             Repositorio rep = new Repositorio();
             var resultadoEsperado = rep.AgregarProducto(producto);
@@ -31,13 +30,67 @@ namespace PruebasUnitarias
 
         }
         [TestMethod]
-        public void validarInicioSesion()
+        public void netoGravadoFuncionando()
         {
-            Usuario user = new Usuario("45412", "123");
-            PresentadorLogin login = new PresentadorLogin();
-            string respuestaEsperada = login.iniciarSesion(user);
-            Assert.AreEqual("LoginExitoso", respuestaEsperada);
+            Producto producto = new Producto
+            {
+                CodigoProducto = 100,
+                Descripcion = "Remera Mangas Corta",
+                Costo = 1000,
+                PorcentajeIva = 0.21,
+                MargenGanacia = 0.20
+            };
 
+            double netoGravadoEsperado = 1200;
+            double resultado = producto.NetoGravado();
+            Assert.AreEqual(netoGravadoEsperado, resultado);
+        }
+        [TestMethod]
+        public void ivaFuncionando()
+        {
+            Producto producto = new Producto
+            {
+                CodigoProducto = 100,
+                Descripcion = "Remera Mangas Corta",
+                Costo = 1000,
+                PorcentajeIva = 0.21,
+                MargenGanacia = 0.20
+            };
+            producto.NetoGravado();
+            double ivaEsperado = 252;
+            double resultado = producto.IVA();
+            Assert.AreEqual(ivaEsperado, resultado);
+        }
+        [TestMethod]
+        public void precioFinalFuncionando()
+        {
+            Producto producto = new Producto
+            {
+                CodigoProducto = 100,
+                Descripcion = "Remera Mangas Corta",
+                Costo = 1000,
+                PorcentajeIva = 0.21,
+                MargenGanacia = 0.20
+            };
+            producto.NetoGravado();
+            producto.IVA();
+            double precioFinalEsperado = 1452;
+            double resultado = producto.precioFinal();
+            Assert.AreEqual(precioFinalEsperado, resultado);
+        }
+        [TestMethod]
+        public void loginExitoso()
+        {
+            Usuario user = new Usuario
+            {
+                nombre = "chino",
+                contraseña= "12345678",
+                rol = "admin"
+            };            
+            Repositorio _repo = new Repositorio();           
+            string respestaEsperado = "Login Exitoso";
+            string resultado = _repo.IngresarUsuario(user.nombre, user.contraseña);      
+            Assert.AreEqual(respestaEsperado, resultado);
         }
     }
 }

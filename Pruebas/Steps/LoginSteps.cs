@@ -11,7 +11,7 @@ namespace Pruebas.Steps
 {
     class LoginSteps
     {
-        Usuario user;
+        Usuario? user;
         String respuesta = "";
 
         [Given(@"que somos un usuario")]
@@ -24,7 +24,9 @@ namespace Pruebas.Steps
         public void WhenIniciamosSesionConY(int legajo, int contraseña)
         {
             PresentadorLogin login = new PresentadorLogin();
-            user.legajo = legajo.ToString();
+#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
+            user.nombre = legajo.ToString();
+#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
             user.contraseña = contraseña.ToString();
             respuesta = login.iniciarSesion(user);
         }

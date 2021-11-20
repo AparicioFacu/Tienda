@@ -11,33 +11,36 @@ namespace Presentador.Presentadores
 {
     public class PresentadorLogin
     {
-        private Repositorio repo;       
+        private Repositorio repo;
+        
 
-
-        public String iniciarSesion(Usuario user)
+        public void iniciarSesion(string nombre, string contraseña)
         {
             repo = new Repositorio();
-            var rol = repo.IngresarUsuario(user.legajo, user.contraseña);
-            if (rol == "admin")
-            {
-                Menu menu = new Menu();
-                menu.Show();
-                //this.Hide();
-                return "LoginExitoso";
-            }
-            else if (rol == "vendedor")
-            {
-                //Restringir Accesos
-                return null;
-            }
+            var respuesta = repo.IngresarUsuario(nombre, contraseña);
+            var rol = repo.rolUsuario(nombre, contraseña);
+            if (respuesta == "Login Exitoso")
+            {             
+                if (rol.Equals("admin"))
+                {
+                    Menu menu = new Menu();
+                    menu.Show();
+                    //this.Hide(); 
+                }
+                else
+                {
+                    //Restringir Accesos   
+                }
+
+            }            
             else
             {
-                MessageBox.Show("Legajo o contraseña incorrectos");
-                return "LoginNoesExitoso";
+                MessageBox.Show("Legajo o contraseña incorrectos");               
                 //txtContraseña.Clear();
                 //txtUsuario.Focus();
             }
         }
+        
 
     }
 }

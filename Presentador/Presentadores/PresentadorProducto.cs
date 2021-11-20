@@ -63,15 +63,7 @@ namespace Presentador.Presentadores
                 Descripcion = txtDescripcion.Text,
                 MargenGanacia = Convert.ToDouble(txtMargenGanancia.Text),
                 PorcentajeIva = Convert.ToDouble(txtPorcentajeIVA.Text),
-                PrecioFinal = Convert.ToDouble(txtPrecioFinal.Text),
-                Marca = new Marca()
-                {
-                    descripcion = cbxRubro.Text
-                },
-                Rubro = new Rubro()
-                {
-                    descripcion = cbxRubro.Text
-                }
+                //PrecioFinal = Convert.ToDouble(txtPrecioFinal.Text),               
                 
             };
             MessageBox.Show(_stock.CodigoProducto.CodigoProducto.ToString());

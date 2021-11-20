@@ -9,48 +9,49 @@ namespace Dominio
     public class Producto
     {
         private double _margenGanancia;
-        private bool _precioEspecifico;
-        private double _precioFinal;
+        private double _porcentajeIva;
+        private double _netoGravado;
+        private double _iva;
+        private double _precioVenta;
 
-        public Marca Marca { get; set; }
-        public Rubro Rubro { get; set; }
+       // public Marca Marca { get; set; }
+       // public Rubro Rubro { get; set; }
         public int CodigoProducto { get; set; }
         public string Descripcion { get; set; }
-        public double Costo { get; set; }
-        public double PorcentajeIva { get; set; }
-        public double NetoGravado => Costo + (Costo*_margenGanancia);
-        public double Iva => NetoGravado * PorcentajeIva;
+        public double Costo { get; set; }             
         
         public double MargenGanacia
         {
-            get => _margenGanancia;
+            get => _margenGanancia*100;
             set
             {
-                _margenGanancia = value;
-                _precioEspecifico = false;
-                _precioFinal = 0;
+                _margenGanancia = (value/100);              
             }          
         }
-
-        public double PrecioFinal
+        public double PorcentajeIva
         {
-            get
-            {
-                if (!_precioEspecifico)
-                {
-                    return Math.Round(NetoGravado + Iva, 2);
-                }
-                else
-                {
-                    return Math.Round(_precioFinal, 2);
-                }
-            }
+            get => _porcentajeIva * 100;
             set
             {
-                _precioFinal = value;
-                _precioEspecifico = true;
-                MargenGanacia = (_precioFinal - Iva) / Iva;
+                _porcentajeIva = (value / 100);
             }
+        }
+
+        public double NetoGravado()
+        {
+           _netoGravado = Costo + (Costo * MargenGanacia);
+            return _netoGravado;
+        }
+
+        public double IVA()
+        {
+            _iva = _netoGravado * PorcentajeIva;
+            return _iva;
+        }
+        public double precioFinal()
+        {
+            _precioVenta = _netoGravado + _iva;
+            return _precioVenta;
         }
     }
 }

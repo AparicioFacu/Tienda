@@ -8,5 +8,5 @@ Scenario Outline: iniciar sesión o no iniciar sesión en la aplicación
     Then el inicio de sesión "<respuesta>"
     Examples:
       | usuario | contraseña | respuesta |     
-      | 45412 | 123 | LoginExitoso |
+      | chino | 12345678 | LoginExitoso |
       | sssss | sssss | LoginNoEsExitoso |

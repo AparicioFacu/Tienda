@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Sucursal
+    public class Empleado
     {
         public string nombre { get; set; }
-        public string direccion { get; set; }
+        public int legajo { get; set; }
     }
 }
