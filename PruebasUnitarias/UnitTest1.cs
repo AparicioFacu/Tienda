@@ -12,7 +12,7 @@ namespace PruebasUnitarias
     {
         [TestMethod]
         
-        public void crearNuevoProducto()
+        public void crearNuevoProductoExitoso()
         {
 
             Producto producto = new Producto
@@ -30,7 +30,7 @@ namespace PruebasUnitarias
 
         }
         [TestMethod]
-        public void netoGravadoFuncionando()
+        public void netoGravadoExitoso()
         {
             Producto producto = new Producto
             {
@@ -46,7 +46,7 @@ namespace PruebasUnitarias
             Assert.AreEqual(netoGravadoEsperado, resultado);
         }
         [TestMethod]
-        public void ivaFuncionando()
+        public void ivaExitoso()
         {
             Producto producto = new Producto
             {
@@ -62,7 +62,7 @@ namespace PruebasUnitarias
             Assert.AreEqual(ivaEsperado, resultado);
         }
         [TestMethod]
-        public void precioFinalFuncionando()
+        public void precioExitoso()
         {
             Producto producto = new Producto
             {
