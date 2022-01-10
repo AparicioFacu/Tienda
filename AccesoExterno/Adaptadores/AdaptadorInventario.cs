@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Presentador.Presentadores
+namespace AccesoExterno.Adaptadores
 {
     public class AdaptadorInventario
     {
