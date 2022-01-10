@@ -8,6 +8,6 @@ namespace Dominio
 {
     public class CondicionTributaria
     {   
-        public string descripcion { get; set; }
+        public string Descripcion { get; set; }
     }
 }

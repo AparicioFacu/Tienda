@@ -8,6 +8,16 @@ namespace Dominio
 {
     public class Rubro
     {
-        public string descripcion { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+
+        public Rubro(int id)
+        {
+            this.Id = id;
+        }
+        public Rubro()
+        {
+            
+        }
     }
 }

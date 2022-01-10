@@ -10,17 +10,27 @@ namespace Dominio
     {
         private double _margenGanancia;
         private double _porcentajeIva;
-        private double _netoGravado;
-        private double _iva;
-        private double _precioVenta;
 
-       // public Marca Marca { get; set; }
-       // public Rubro Rubro { get; set; }
         public int CodigoProducto { get; set; }
         public string Descripcion { get; set; }
-        public double Costo { get; set; }             
-        
-        public double MargenGanacia
+        public double Costo { get; set; }
+
+        public double PrecioVenta { get; set; }
+        public double NetoGravado { get; set; }
+        public double Iva { get; set; }
+        public Marca Marca { get; set; }
+        public Rubro Rubro { get; set; }
+
+        public Producto(Marca marca, Rubro rubro)
+        {
+            this.Marca = marca;
+            this.Rubro = rubro;
+        }
+        public Producto()
+        {
+           
+        }
+        public double MargenGanancia
         {
             get => _margenGanancia*100;
             set
@@ -35,23 +45,22 @@ namespace Dominio
             {
                 _porcentajeIva = (value / 100);
             }
-        }
-
-        public double NetoGravado()
+        }      
+        public double NetoGravados()
         {
-           _netoGravado = Costo + (Costo * MargenGanacia);
-            return _netoGravado;
+            NetoGravado = Costo + (Costo * MargenGanancia);
+            return NetoGravado;
         }
 
         public double IVA()
         {
-            _iva = _netoGravado * PorcentajeIva;
-            return _iva;
+            Iva = NetoGravado * PorcentajeIva;
+            return Iva;
         }
         public double precioFinal()
         {
-            _precioVenta = _netoGravado + _iva;
-            return _precioVenta;
+            PrecioVenta = NetoGravado + Iva;
+            return PrecioVenta;
         }
     }
 }

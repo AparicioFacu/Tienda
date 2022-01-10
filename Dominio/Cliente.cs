@@ -8,9 +8,9 @@ namespace Dominio
 {
     public class Cliente
     {
-        public string cuit { get; set; }
-        public string nombre { get; set; }
-        public string direccion { get; set; }
+        public string Cuit { get; set; }
+        public string Nombre { get; set; }
+        public string Direccion { get; set; }
 
     }
 }

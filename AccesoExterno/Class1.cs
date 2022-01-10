@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dominio
+namespace AccesoExterno
 {
-    public class Color
+    public class Class1
     {
-        public int? Id { get; set; }
-        public string Descripcion { get; set; }
     }
 }

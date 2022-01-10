@@ -9,8 +9,8 @@ namespace Dominio
     public class Venta
     {
         public DateTime fecha { get; set; }
-        public double subTotal { get; set; }
-        public string total { get; set; }
+        public double SubTotal { get; set; }
+        public string Total { get; set; }
          
     }
 }

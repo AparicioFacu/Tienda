@@ -1,4 +1,4 @@
-﻿using Datos;
+﻿
 using Presentador.Presentadores;
 using System;
 using System.Collections.Generic;
@@ -16,11 +16,11 @@ namespace Presentador
     {
         public int codigo;
         private PresentadorEspecificacionProducto _presentador;
-        public EspecificacionProducto(int codigo, Repositorio rep)
+        public EspecificacionProducto(int codigo)
         {
             InitializeComponent();
             this.codigo = codigo;
-            _presentador = new PresentadorEspecificacionProducto(this, rep, dgvEspecificaciones);
+            _presentador = new PresentadorEspecificacionProducto(this, dgvEspecificaciones);
         }
 
         private void EspecificacionProducto_Load(object sender, EventArgs e)

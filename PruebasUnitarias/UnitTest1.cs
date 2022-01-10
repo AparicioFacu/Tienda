@@ -62,7 +62,7 @@ namespace PruebasUnitarias
             Assert.AreEqual(ivaEsperado, resultado);
         }
         [TestMethod]
-        public void precioExitoso()
+        public void precioFinalExitoso()
         {
             Producto producto = new Producto
             {

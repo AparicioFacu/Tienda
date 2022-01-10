@@ -41,6 +41,7 @@
             this.dvgProductos.Size = new System.Drawing.Size(832, 245);
             this.dvgProductos.TabIndex = 0;
             this.dvgProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgProductos_CellClick);
+            this.dvgProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgProductos_CellContentClick);
             // 
             // btnProducto
             // 

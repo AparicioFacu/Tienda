@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Stock
+    public class Inventario
     {
         public int StockDisponible { get; set; }
         public Producto CodigoProducto { get; set; }
-        public Talle talle { get; set; }
-        public Color color { get; set; }
+        public Talle Talle { get; set; }
+        public Color Color { get; set; }
+        public Sucursal Sucursal { get; set; }
 
     }
 }

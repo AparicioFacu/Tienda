@@ -8,8 +8,19 @@ namespace Dominio
 {
     public class LineaVenta
     {
-        public int cantidad { get; set; }
-        public double precioUnitario { get; set; }
-        public double total { get; set; }
+        public int Cantidad { get; set; }
+        public double PrecioUnitario { get; set; }
+        public double Total { get; set; }
+        public Producto _productos { get; set; }
+
+        public double PrecioFinal()
+        {
+            Total = PrecioUnitario * Cantidad;
+            return Total;
+        }
     }
+
+    
+
+
 }

@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class TipoTalle
     {
-        public string tipoTalle { get; set; }
+        public int? Id { get; set; }
+        public string Descripcion { get; set; }
     }
 }

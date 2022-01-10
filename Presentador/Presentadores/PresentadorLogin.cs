@@ -1,4 +1,4 @@
-﻿using Datos;
+﻿using AccesoExterno.Adaptadores;
 using Dominio;
 using System;
 using System.Collections.Generic;
@@ -11,33 +11,29 @@ namespace Presentador.Presentadores
 {
     public class PresentadorLogin
     {
-        private Repositorio repo;
-        
-
+        AdaptadorUsuario AdaptadorUsuario = new AdaptadorUsuario();
+        List<Usuario> usuarios;
         public void iniciarSesion(string nombre, string contraseña)
         {
-            repo = new Repositorio();
-            var respuesta = repo.IngresarUsuario(nombre, contraseña);
-            var rol = repo.rolUsuario(nombre, contraseña);
-            if (respuesta == "Login Exitoso")
-            {             
-                if (rol.Equals("admin"))
+            usuarios = AdaptadorUsuario.GetUsuarios();
+            foreach(var user in usuarios)
+            {
+                if (nombre.Equals(user.Nombre) && contraseña.Equals(user.Contraseña))
                 {
-                    Menu menu = new Menu();
-                    menu.Show();
-                    //this.Hide(); 
+                    if(user.Rol == "admin")
+                    {
+                        Menu menu = new Menu();
+                        menu.Show();
+                    }else if(user.Rol == "vendedor")
+                    {
+                        //restringir acceso
+                    }
+                    
                 }
                 else
                 {
-                    //Restringir Accesos   
+                    //MessageBox.Show("Legajo o contraseña incorrectos");
                 }
-
-            }            
-            else
-            {
-                MessageBox.Show("Legajo o contraseña incorrectos");               
-                //txtContraseña.Clear();
-                //txtUsuario.Focus();
             }
         }
         

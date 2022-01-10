@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Color = System.Drawing.Color;
-using Datos;
 using Presentador.Presentadores;
 using Dominio;
 

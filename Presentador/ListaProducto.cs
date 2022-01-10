@@ -23,7 +23,7 @@ namespace Presentador
 
         private void ListaProducto_Load(object sender, EventArgs e)
         {
-            _presentadorLista.Load();
+            _presentadorLista.LoadProducto();
         }
 
         private void dvgProductos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -46,6 +46,11 @@ namespace Presentador
         private void btnProducto_Click(object sender, EventArgs e)
         {
             _presentadorLista.Agregar();
+        }
+
+        private void dvgProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

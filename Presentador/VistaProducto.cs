@@ -1,4 +1,4 @@
-﻿using Datos;
+﻿
 using Presentador.Presentadores;
 using System;
 using System.Collections.Generic;
@@ -16,11 +16,11 @@ namespace Presentador
     {
         private PresentadorProducto _presentador;
         int cod;
-        public VistaProducto(int codigo, Repositorio rep)
+        public VistaProducto(int codigo)
         {
             InitializeComponent();
             cod = codigo;
-            _presentador = new PresentadorProducto(this, rep, dgvEspecificaciones);
+            _presentador = new PresentadorProducto(this, dgvEspecificaciones,cbxMarca,cbxRubro,cbxColor,cbxTipoTalle,cbxTalle);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,7 +30,7 @@ namespace Presentador
 
         private void VistaProducto_Load(object sender, EventArgs e)
         {
-            _presentador.Load(cod, cbxColor, cbxMarca, cbxRubro, cbxTalle);
+            _presentador.Load(cod, cbxColor, cbxMarca, cbxRubro, cbxTalle,cbxTipoTalle);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -41,6 +41,16 @@ namespace Presentador
         private void btnGuardar_Click(object sender, EventArgs e)
         {
            _presentador.Guardar(txtCodigo,txtCosto,txtDescripcion,txtMargenGanancia,txtPorcentajeIVA,txtPrecioFinal,cbxRubro,cbxMarca, cbxColor, cbxTalle, txtStock);
+        }
+
+        private void txtPrecioFinal_Click(object sender, EventArgs e)
+        {
+            _presentador.CalcularPrecioFinal(txtMargenGanancia, txtCosto, txtPrecioFinal, txtPorcentajeIVA);
+        }
+
+        private void cbxTipoTalle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _presentador.ActualizarCbxTalle(cbxTipoTalle);
         }
     }
 }

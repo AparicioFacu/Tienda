@@ -8,6 +8,16 @@ namespace Dominio
 {
     public class Marca
     {
-        public string descripcion { get; set; }
+        public int? Id { get; set; }
+        public string Descripcion { get; set; }
+
+        public Marca(int id)
+        {
+            this.Id = id;
+        }
+        public Marca()
+        {
+           
+        }
     }
 }

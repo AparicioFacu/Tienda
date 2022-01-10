@@ -1,7 +1,12 @@
-﻿using Datos;
+﻿using AccesoExterno;
+using AccesoExterno.Adaptadores;
+using Dominio;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,20 +15,36 @@ namespace Presentador.Presentadores
 {
     class PresentadorListaProducto
     {
-        private ListaProducto _vistaListaProducto;   
-        private Repositorio _repositorio;
+        private ListaProducto _vistaListaProducto;
+        private VistaVenta _listaProductoVenta;        
         private DataGridView tabla;
+        private AdaptadorProducto _adaptadorProducto;
 
         public PresentadorListaProducto(ListaProducto vista, DataGridView dgv)
         {
             _vistaListaProducto = vista;
-            _repositorio = new Repositorio();
+            tabla = dgv;
+        }
+        public PresentadorListaProducto(VistaVenta vista, DataGridView dgv)
+        {
+            _listaProductoVenta = vista;
             tabla = dgv;
         }
 
-        public void Load()
+        public void LoadProducto()
         {
-            ActulizarTabla();
+            ActulizarTablaProducto();          
+
+            DataGridViewButtonColumn btngrid = new DataGridViewButtonColumn();
+            btngrid.Name = "Especificaciones";
+            btngrid.HeaderText = "Visualizar Especificaciones";
+            btngrid.Text = "Ver Mas";
+            btngrid.UseColumnTextForButtonValue = true;
+            tabla.Columns.Add(btngrid);
+        }
+        public void LoadVenta()
+        {           
+            ActulizarTablaVenta();
 
             DataGridViewButtonColumn btngrid = new DataGridViewButtonColumn();
             btngrid.Name = "Especificaciones";
@@ -33,31 +54,27 @@ namespace Presentador.Presentadores
             tabla.Columns.Add(btngrid);
         }
         public void VerMas(int codigo)
-        {
-            var _vistaEspecificaciones = new EspecificacionProducto(codigo, _repositorio);
-            _vistaEspecificaciones.ShowDialog();            
+        {       
         }
         public void Agregar()
         {
             var cod = 0;
-            var vistaProducto = new VistaProducto(cod,_repositorio);
+            var vistaProducto = new VistaProducto(cod);
             vistaProducto.ShowDialog();
-            ActulizarTabla();
+            ActulizarTablaProducto();
         }
 
-        public void ActulizarTabla()
+        public void ActulizarTablaProducto()
         {
-            tabla.DataSource = (from productos in _repositorio._productos
-                                select new
-                                {
-                                    Codigo = productos.CodigoProducto,
-                                    Descripcion = productos.Descripcion,
-                                    Costo = productos.Costo,
-                                    PorcentajeIva = productos.PorcentajeIva,
-                                    MargenGanacia = productos.MargenGanacia,
-                                    
-                                }
-               ).ToList();
+            _adaptadorProducto = new AdaptadorProducto();
+            List<Producto> productos = _adaptadorProducto.GetProductos();
+            tabla.DataSource = productos;
+        }
+
+       
+
+        public void ActulizarTablaVenta()
+        {            
         }
     }
 }

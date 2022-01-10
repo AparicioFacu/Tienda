@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dgvEspecificaciones = new System.Windows.Forms.DataGridView();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Talle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label111 = new System.Windows.Forms.Label();
             this.label223 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,9 +56,8 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Talle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbxTipoTalle = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEspecificaciones)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +72,21 @@
             this.dgvEspecificaciones.Name = "dgvEspecificaciones";
             this.dgvEspecificaciones.Size = new System.Drawing.Size(344, 148);
             this.dgvEspecificaciones.TabIndex = 0;
+            // 
+            // Stock
+            // 
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            // 
+            // Talle
+            // 
+            this.Talle.HeaderText = "Talle";
+            this.Talle.Name = "Talle";
+            // 
+            // Color
+            // 
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
             // 
             // label111
             // 
@@ -155,7 +172,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(536, 238);
+            this.label7.Location = new System.Drawing.Point(537, 246);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(30, 13);
             this.label7.TabIndex = 10;
@@ -190,7 +207,7 @@
             // cbxTalle
             // 
             this.cbxTalle.FormattingEnabled = true;
-            this.cbxTalle.Location = new System.Drawing.Point(583, 235);
+            this.cbxTalle.Location = new System.Drawing.Point(583, 243);
             this.cbxTalle.Name = "cbxTalle";
             this.cbxTalle.Size = new System.Drawing.Size(121, 21);
             this.cbxTalle.TabIndex = 14;
@@ -244,6 +261,7 @@
             this.txtPrecioFinal.Name = "txtPrecioFinal";
             this.txtPrecioFinal.Size = new System.Drawing.Size(100, 20);
             this.txtPrecioFinal.TabIndex = 21;
+            this.txtPrecioFinal.Click += new System.EventHandler(this.txtPrecioFinal_Click);
             // 
             // txtStock
             // 
@@ -272,26 +290,31 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // Stock
+            // cbxTipoTalle
             // 
-            this.Stock.HeaderText = "Stock";
-            this.Stock.Name = "Stock";
+            this.cbxTipoTalle.FormattingEnabled = true;
+            this.cbxTipoTalle.Location = new System.Drawing.Point(583, 202);
+            this.cbxTipoTalle.Name = "cbxTipoTalle";
+            this.cbxTipoTalle.Size = new System.Drawing.Size(121, 21);
+            this.cbxTipoTalle.TabIndex = 25;
+            this.cbxTipoTalle.SelectedIndexChanged += new System.EventHandler(this.cbxTipoTalle_SelectedIndexChanged);
             // 
-            // Talle
+            // label10
             // 
-            this.Talle.HeaderText = "Talle";
-            this.Talle.Name = "Talle";
-            // 
-            // Color
-            // 
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(526, 206);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(51, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "TipoTalle";
             // 
             // VistaProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 476);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.cbxTipoTalle);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtStock);
@@ -356,5 +379,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn Talle;
         private System.Windows.Forms.DataGridViewTextBoxColumn Color;
+        private System.Windows.Forms.ComboBox cbxTipoTalle;
+        private System.Windows.Forms.Label label10;
     }
 }

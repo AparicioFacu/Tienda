@@ -8,9 +8,9 @@ namespace Dominio
 {
     public class Usuario
     {
-        public string nombre { get; set; }               
-        public string contraseña { get; set; }
-        public string rol { get; set; }
+        public string Nombre { get; set; }               
+        public string Contraseña { get; set; }
+        public string Rol { get; set; }
 
         public Usuario()
         {
@@ -18,8 +18,8 @@ namespace Dominio
         }
         public Usuario(string nombre, string contraseña)
         {
-            this.nombre = nombre;
-            this.contraseña = contraseña;
+            this.Nombre = nombre;
+            this.Contraseña = contraseña;
         }
     }
 }
