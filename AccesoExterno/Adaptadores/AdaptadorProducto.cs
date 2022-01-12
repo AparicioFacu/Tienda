@@ -22,7 +22,8 @@ namespace AccesoExterno.Adaptadores
         public async void ActulizarProductos()
         {
             string respuesta = await GetHttp();
-            listProduct = JsonConvert.DeserializeObject<List<Producto>>(respuesta);            
+            listProduct = JsonConvert.DeserializeObject<List<Producto>>(respuesta);
+            
         }
         private async Task<string> GetHttp()
         {

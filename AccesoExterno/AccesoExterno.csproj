@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptadores\AdaptadorColor.cs" />
+    <Compile Include="Adaptadores\AdaptadorInventario.cs" />
     <Compile Include="Adaptadores\AdaptadorMarca.cs" />
     <Compile Include="Adaptadores\AdaptadorProducto.cs" />
     <Compile Include="Adaptadores\AdaptadorRubro.cs" />

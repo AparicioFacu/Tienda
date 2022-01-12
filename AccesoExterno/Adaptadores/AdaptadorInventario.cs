@@ -8,5 +8,6 @@ namespace AccesoExterno.Adaptadores
 {
     public class AdaptadorInventario
     {
+
     }
 }
