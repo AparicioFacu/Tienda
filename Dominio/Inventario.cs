@@ -14,5 +14,13 @@ namespace Dominio
         public Color Color { get; set; }
         public Sucursal Sucursal { get; set; }
 
+        public Inventario()
+        {
+
+        }
+        public Inventario(Sucursal suc)
+        {
+            this.Sucursal = suc;
+        }
     }
 }

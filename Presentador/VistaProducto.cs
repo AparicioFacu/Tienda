@@ -20,7 +20,7 @@ namespace Presentador
         {
             InitializeComponent();
             cod = codigo;
-            _presentador = new PresentadorProducto(this, dgvEspecificaciones,cbxMarca,cbxRubro,cbxColor,cbxTipoTalle,cbxTalle);
+            _presentador = new PresentadorProducto(this,cbxMarca,cbxRubro,cbxColor,cbxTipoTalle,cbxTalle);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace Presentador
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-           _presentador.Guardar(txtCodigo,txtCosto,txtDescripcion,txtMargenGanancia,txtPorcentajeIVA,txtPrecioFinal,cbxRubro,cbxMarca, cbxColor, cbxTalle, txtStock);
+           _presentador.Guardar(txtCodigo,txtCosto,txtDescripcion,txtMargenGanancia,txtPorcentajeIVA,txtPrecioFinal,cbxRubro,cbxMarca, cbxColor, cbxTalle, txtStock, cbxTipoTalle);
         }
 
         private void txtPrecioFinal_Click(object sender, EventArgs e)
@@ -51,6 +51,11 @@ namespace Presentador
         private void cbxTipoTalle_SelectedIndexChanged(object sender, EventArgs e)
         {
             _presentador.ActualizarCbxTalle(cbxTipoTalle);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            _presentador.BuscarProducto(txtCodigo, txtCosto, txtDescripcion, txtMargenGanancia, txtPorcentajeIVA, txtPrecioFinal, cbxRubro, cbxMarca);
         }
     }
 }

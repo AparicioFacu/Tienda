@@ -51,6 +51,7 @@
     <Compile Include="Adaptadores\AdaptadorMarca.cs" />
     <Compile Include="Adaptadores\AdaptadorProducto.cs" />
     <Compile Include="Adaptadores\AdaptadorRubro.cs" />
+    <Compile Include="Adaptadores\AdaptadorSucursal.cs" />
     <Compile Include="Adaptadores\AdaptadorTalle.cs" />
     <Compile Include="Adaptadores\AdaptadorTipoTalle.cs" />
     <Compile Include="Adaptadores\AdaptadorUsuario.cs" />

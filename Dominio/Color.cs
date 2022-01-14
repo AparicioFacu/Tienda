@@ -10,5 +10,13 @@ namespace Dominio
     {
         public int? Id { get; set; }
         public string Descripcion { get; set; }
+
+        public Color()
+        {          
+        }
+        public Color(int id)
+        {
+            this.Id = id;
+        }
     }
 }

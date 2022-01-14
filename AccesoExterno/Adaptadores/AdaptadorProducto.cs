@@ -14,9 +14,16 @@ namespace AccesoExterno.Adaptadores
     public class AdaptadorProducto
     {
         List<Producto> listProduct;
+        List<Producto> listProductBuscar;
+        string idCodigo;
         public AdaptadorProducto()
         {
             ActulizarProductos();
+        }
+        public AdaptadorProducto(string cod)
+        {
+            this.idCodigo = cod;
+            ActulizarUnProducto();
         }
         ////GET
         public async void ActulizarProductos()
@@ -35,6 +42,26 @@ namespace AccesoExterno.Adaptadores
         public List<Producto> GetProductos()
         {
             return listProduct;
+        }
+
+        //Get unico
+
+        public async void ActulizarUnProducto()
+        {
+            string respuesta = await GetHttpBuscar();
+            listProductBuscar = JsonConvert.DeserializeObject<List<Producto>>(respuesta);
+
+        }
+        private async Task<string> GetHttpBuscar()
+        {
+            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Product?cod={idCodigo}");
+            WebResponse oResponse = oRequest.GetResponse();
+            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
+            return await sr.ReadToEndAsync();
+        }
+        public List<Producto> GetProducto()
+        {
+            return listProductBuscar;
         }
 
         ////POST

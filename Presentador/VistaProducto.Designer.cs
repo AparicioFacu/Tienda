@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvEspecificaciones = new System.Windows.Forms.DataGridView();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Talle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label111 = new System.Windows.Forms.Label();
             this.label223 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,35 +54,8 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.cbxTipoTalle = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEspecificaciones)).BeginInit();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // dgvEspecificaciones
-            // 
-            this.dgvEspecificaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEspecificaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Stock,
-            this.Talle,
-            this.Color});
-            this.dgvEspecificaciones.Location = new System.Drawing.Point(136, 238);
-            this.dgvEspecificaciones.Name = "dgvEspecificaciones";
-            this.dgvEspecificaciones.Size = new System.Drawing.Size(344, 148);
-            this.dgvEspecificaciones.TabIndex = 0;
-            // 
-            // Stock
-            // 
-            this.Stock.HeaderText = "Stock";
-            this.Stock.Name = "Stock";
-            // 
-            // Talle
-            // 
-            this.Talle.HeaderText = "Talle";
-            this.Talle.Name = "Talle";
-            // 
-            // Color
-            // 
-            this.Color.HeaderText = "Color";
-            this.Color.Name = "Color";
             // 
             // label111
             // 
@@ -267,7 +236,7 @@
             // 
             this.txtStock.Location = new System.Drawing.Point(583, 318);
             this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(100, 20);
+            this.txtStock.Size = new System.Drawing.Size(121, 20);
             this.txtStock.TabIndex = 22;
             // 
             // btnAgregar
@@ -308,11 +277,22 @@
             this.label10.TabIndex = 26;
             this.label10.Text = "TipoTalle";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(307, 50);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 27;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // VistaProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 476);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cbxTipoTalle);
             this.Controls.Add(this.btnGuardar);
@@ -339,19 +319,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label223);
             this.Controls.Add(this.label111);
-            this.Controls.Add(this.dgvEspecificaciones);
             this.Name = "VistaProducto";
             this.Text = "VistaProducto";
             this.Load += new System.EventHandler(this.VistaProducto_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEspecificaciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvEspecificaciones;
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.Label label223;
         private System.Windows.Forms.Label label1;
@@ -376,10 +352,8 @@
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Talle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
         private System.Windows.Forms.ComboBox cbxTipoTalle;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnBuscar;
     }
 }

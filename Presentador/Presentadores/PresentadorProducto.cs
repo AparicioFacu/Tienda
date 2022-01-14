@@ -19,30 +19,35 @@ namespace Presentador.Presentadores
         private VistaProducto _vistaProducto;
         //Adaptadores
         private AdaptadorProducto _adaptadorProducto;
+        private AdaptadorProducto _adaptadorProducto2;
+        private AdaptadorProducto _adaptadorBuscarProducto;
         private AdaptadorMarca _adaptadorMarca;
         private AdaptadorRubro _adaptadorRubro;
         private AdaptadorColor _adaptadorColor;
         private AdaptadorTipoTalle _adaptadorTipoTalle;
         private AdaptadorTalle _adaptadorTalle;
+        private AdaptadorInventario _adaptadorInventario;
+        private AdaptadorSucursal _adaptadorSucursal;
         //Vista
-        private DataGridView tabla;
         private ComboBox cbxMarca;
         private ComboBox cbxRubro;
         private ComboBox cbxColor;
         private ComboBox cbxTipoTalle;
         private ComboBox cbxTalle;
 
+        //Dominio
         private Producto _producto = new Producto();
+        Inventario _newInventario;
 
-        public PresentadorProducto(VistaProducto vista, DataGridView dgv, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxColor, ComboBox cbxTipoTalle, ComboBox cbxTalle)
-        {
-            tabla = dgv;
+        public PresentadorProducto(VistaProducto vista, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxColor, ComboBox cbxTipoTalle, ComboBox cbxTalle)
+        {           
             _vistaProducto = vista;
             this.cbxMarca = cbxMarca;
             this.cbxRubro = cbxRubro;
             this.cbxColor = cbxColor;
             this.cbxTipoTalle = cbxTipoTalle;
             this.cbxTalle = cbxTalle;
+            _adaptadorSucursal = new AdaptadorSucursal();
         }
 
         public void Load(int cod, ComboBox cbxColor, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxTalle,ComboBox cbxTipoTalle)
@@ -54,36 +59,96 @@ namespace Presentador.Presentadores
         }
         public void Agregar(ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock)
         {
-            tabla.Rows.Add(cbxColor.Text, cbxTalle.Text, Convert.ToInt32(txtStock.Text));
+           
         }
-        public void Guardar(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca, ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock)
+        public void Guardar(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca, ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock, ComboBox cbxTipoTalle)
         {
-            int idMarca = cbxMarca.SelectedIndex +1;
-            int idRubro = cbxRubro.SelectedIndex +1;
-            Marca _marca = new Marca(idMarca);
-            Rubro _rubro = new Rubro(idRubro);
-            _marca.Descripcion = cbxMarca.Text;
-            _rubro.Descripcion = cbxRubro.Text;
+            if (!String.IsNullOrEmpty(txtCodigo.Text))
+            {
 
+            }
+            else
+            {
+                int idMarca = cbxMarca.SelectedIndex + 1;
+                int idRubro = cbxRubro.SelectedIndex + 1;
+                Marca _marca = new Marca(idMarca);
+                Rubro _rubro = new Rubro(idRubro);
+                _marca.Descripcion = cbxMarca.Text;
+                _rubro.Descripcion = cbxRubro.Text;
 
-            Producto _newProducto = new Producto(_marca, _rubro);
-   
-            _newProducto.CodigoProducto = int.Parse(txtCodigo.Text);
-            _newProducto.Costo = Double.Parse(txtCosto.Text);
-            _newProducto.Descripcion = txtDescripcion.Text;
-            _newProducto.MargenGanancia = Double.Parse(txtMargenGanancia.Text);
-            _newProducto.PorcentajeIva = Double.Parse(txtPorcentajeIVA.Text);
-            _newProducto.NetoGravado = _newProducto.NetoGravados();
-            _newProducto.Iva = _newProducto.IVA();
-            _newProducto.PrecioVenta = Double.Parse(txtPrecioFinal.Text);            
-            _newProducto.Marca.Id = _marca.Id;
-            _newProducto.Rubro.Id = _rubro.Id;
+                Producto _newProducto = new Producto(_marca, _rubro);
+                _newProducto.CodigoProducto = int.Parse(txtCodigo.Text);
+                _newProducto.Costo = Double.Parse(txtCosto.Text);
+                _newProducto.Descripcion = txtDescripcion.Text;
+                _newProducto.MargenGanancia = Double.Parse(txtMargenGanancia.Text);
+                _newProducto.PorcentajeIva = Double.Parse(txtPorcentajeIVA.Text);
+                _newProducto.NetoGravado = _newProducto.NetoGravados();
+                _newProducto.Iva = _newProducto.IVA();
+                _newProducto.PrecioVenta = Double.Parse(txtPrecioFinal.Text);
+                _newProducto.Marca.Id = _marca.Id;
+                _newProducto.Rubro.Id = _rubro.Id;
 
-            _adaptadorProducto = new AdaptadorProducto();
+                _adaptadorProducto = new AdaptadorProducto();
+                string urlProducto = "https://localhost:44347/api/Product";
+                _adaptadorProducto.Add<Producto>(urlProducto, _newProducto, "POST");
 
-            string url = "https://localhost:44347/api/Product";
-            _adaptadorProducto.Add<Producto>(url,_newProducto, "POST");
-            
+                int idColor = cbxColor.SelectedIndex + 1;
+                int idTipoTalle = cbxTipoTalle.SelectedIndex + 1;
+                int idTalle = 0;
+
+                if (idTipoTalle == 1)
+                {
+                    idTalle = cbxTalle.SelectedIndex + 7;
+                }
+                if (idTipoTalle == 2)
+                {
+                    idTalle = cbxTalle.SelectedIndex + 1;
+                }
+                if (idTipoTalle == 3)
+                {
+                    idTalle = cbxTalle.SelectedIndex + 17;
+                }
+
+                Talle _talle = new Talle(idTalle);
+                _talle.Descripcion = cbxTalle.Text;
+                TipoTalle _tipoTalle = new TipoTalle(idTipoTalle);
+                _tipoTalle.Descripcion = cbxTipoTalle.Text;
+                Color _color = new Color(idColor);
+                _color.Descripcion = cbxColor.Text;
+                Sucursal _sucursal = new Sucursal();
+
+                _newInventario = new Inventario(_sucursal);
+                _newInventario.Producto = _newProducto;
+                _newInventario.Color = _color;
+                _newInventario.Talle = _talle;
+
+                _adaptadorProducto2 = new AdaptadorProducto();
+
+                List<Sucursal> sucursales = _adaptadorSucursal.GetSucursal();
+                List<Producto> productos = _adaptadorProducto2.GetProductos();
+
+                foreach (var suc in sucursales)
+                {
+                    if (suc.Id == 1)
+                    {
+                        _newInventario.Sucursal.Id = suc.Id;
+                    }
+                }
+                foreach (var pro in productos)
+                {
+                    if (pro.CodigoProducto == int.Parse(txtCodigo.Text))
+                    {
+                        _newInventario.Producto.Id = pro.Id;
+                    }
+                }
+                _newInventario.Color.Id = _color.Id;
+                _newInventario.StockDisponible = int.Parse(txtStock.Text);
+                _newInventario.Talle.Id = _talle.Id;
+
+                _adaptadorInventario = new AdaptadorInventario();
+                string urlInventario = "https://localhost:44347/api/Inventario";
+                _adaptadorInventario.Add<Inventario>(urlInventario, _newInventario, "POST");
+            }          
         }
       
         public void CalcularPrecioFinal(TextBox txtMargenGanancia, TextBox txtCosto, TextBox txtPrecioFinal, TextBox txtPorcentajeIVA)
@@ -94,6 +159,23 @@ namespace Presentador.Presentadores
             _producto.NetoGravados();
             _producto.IVA();
             txtPrecioFinal.Text = _producto.precioFinal().ToString();
+        }
+        public void BuscarProducto(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca)
+        {
+            _adaptadorBuscarProducto = new AdaptadorProducto(txtCodigo.Text);           
+            List<Producto> productos = _adaptadorBuscarProducto.GetProducto();
+            foreach (var pro in productos)
+            {                
+                txtCodigo.Text = pro.CodigoProducto.ToString();
+                txtCosto.Text = pro.Costo.ToString();
+                txtDescripcion.Text = pro.Descripcion.ToString();
+                txtMargenGanancia.Text = pro.MargenGanancia.ToString();
+                txtPorcentajeIVA.Text = pro.PorcentajeIva.ToString();
+                txtPrecioFinal.Text = pro.PrecioVenta.ToString();
+                cbxMarca.Text = pro.Marca.Descripcion;
+                cbxRubro.Text = pro.Rubro.Descripcion;
+            }
+
         }
 
         /// <summary>

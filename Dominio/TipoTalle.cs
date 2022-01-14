@@ -10,5 +10,14 @@ namespace Dominio
     {
         public int? Id { get; set; }
         public string Descripcion { get; set; }
+
+        public TipoTalle()
+        {
+         
+        }
+        public TipoTalle(int id)
+        {
+            this.Id = id;
+        }
     }
 }

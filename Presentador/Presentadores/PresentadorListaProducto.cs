@@ -66,17 +66,10 @@ namespace Presentador.Presentadores
 
         public void ActulizarTablaProducto()
         {
-            _adaptadorProducto = new AdaptadorProducto();
+            _adaptadorProducto = new AdaptadorProducto();           
             List<Producto> productos = _adaptadorProducto.GetProductos();
-
-            tabla.Columns.Add("Codigo Producto", typeof(int).Name);
-            tabla.Columns.Add("Costo", typeof(double).Name);
-            tabla.Columns.Add("Descripcion", typeof(string).Name);
-
             tabla.DataSource = productos;
         }
-
-       
 
         public void ActulizarTablaVenta()
         {            

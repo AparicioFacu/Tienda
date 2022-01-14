@@ -11,6 +11,7 @@ namespace Dominio
         private double _margenGanancia;
         private double _porcentajeIva;
 
+        public int Id { get; set; }
         public int CodigoProducto { get; set; }
         public string Descripcion { get; set; }
         public double Costo { get; set; }
