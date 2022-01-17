@@ -16,21 +16,15 @@ namespace Presentador.Presentadores
     class PresentadorListaProducto
     {
         private ListaProducto _vistaListaProducto;
-        private VistaVenta _listaProductoVenta;        
+        private EspecificacionProducto _especificacionProducto;
         private DataGridView tabla;
-        private AdaptadorProducto _adaptadorProducto;
+        private AdaptadorProducto _adaptadorProducto;       
 
         public PresentadorListaProducto(ListaProducto vista, DataGridView dgv)
         {
             _vistaListaProducto = vista;
             tabla = dgv;
         }
-        public PresentadorListaProducto(VistaVenta vista, DataGridView dgv)
-        {
-            _listaProductoVenta = vista;
-            tabla = dgv;
-        }
-
         public void LoadProducto()
         {
             ActulizarTablaProducto();          
@@ -41,20 +35,11 @@ namespace Presentador.Presentadores
             btngrid.Text = "Ver Mas";
             btngrid.UseColumnTextForButtonValue = true;
             tabla.Columns.Add(btngrid);
-        }
-        public void LoadVenta()
-        {           
-            ActulizarTablaVenta();
-
-            DataGridViewButtonColumn btngrid = new DataGridViewButtonColumn();
-            btngrid.Name = "Especificaciones";
-            btngrid.HeaderText = "Visualizar Especificaciones";
-            btngrid.Text = "Ver Mas";
-            btngrid.UseColumnTextForButtonValue = true;
-            tabla.Columns.Add(btngrid);
-        }
-        public void VerMas(int codigo)
-        {       
+        }       
+        public void VerMasProducto(int codigo)
+        {
+            _especificacionProducto = new EspecificacionProducto(codigo);
+            _especificacionProducto.Show();
         }
         public void Agregar()
         {
@@ -67,12 +52,19 @@ namespace Presentador.Presentadores
         public void ActulizarTablaProducto()
         {
             _adaptadorProducto = new AdaptadorProducto();           
-            List<Producto> productos = _adaptadorProducto.GetProductos();
-            tabla.DataSource = productos;
-        }
-
-        public void ActulizarTablaVenta()
-        {            
-        }
+            List<Producto> productos = _adaptadorProducto.GetProductos();            
+            tabla.DataSource = (from prod in productos
+                                select new
+                                {
+                                    Codigo = prod.CodigoProducto,
+                                    Descripcion = prod.Descripcion,
+                                    Costo = prod.Costo,
+                                    PorcentajeIva = prod.PorcentajeIva,
+                                    NombreMarca = prod.Marca.Descripcion,
+                                    NombreRubro = prod.Rubro.Descripcion,
+                                    PrecioVenta = prod.PrecioVenta
+                                }
+                ).ToList();
+        }       
     }
 }

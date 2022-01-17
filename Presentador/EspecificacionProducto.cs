@@ -1,4 +1,5 @@
 ﻿
+using Dominio;
 using Presentador.Presentadores;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,12 @@ namespace Presentador
         {
             InitializeComponent();
             this.codigo = codigo;
-            _presentador = new PresentadorEspecificacionProducto(this, dgvEspecificaciones);
+            _presentador = new PresentadorEspecificacionProducto(this, dgvEspecificaciones);         
         }
 
         private void EspecificacionProducto_Load(object sender, EventArgs e)
         {
             _presentador.Cargar(codigo);
-        }
+        }     
     }
 }

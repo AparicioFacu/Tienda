@@ -1,4 +1,6 @@
-﻿using Presentador.Presentadores;
+﻿using AccesoExterno.Adaptadores;
+using Dominio;
+using Presentador.Presentadores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,24 +15,31 @@ namespace Presentador
 {
     public partial class VistaVenta : Form
     {
-
-        private PresentadorListaProducto _presentadorLista;
         private PresentadorVenta _presentadorVenta;
+        public int codigo1;
 
         public VistaVenta()
         {
-            InitializeComponent();
-            _presentadorLista = new PresentadorListaProducto(this, dgvProductos);
-            _presentadorVenta = new PresentadorVenta(this, dgvVentas);
+            InitializeComponent();           
+            _presentadorVenta = new PresentadorVenta(this, dgvVentas,dgvProductos);
         }
         private void VistaVenta_Load(object sender, EventArgs e)
         {
-            _presentadorLista.LoadVenta();
+            _presentadorVenta.LoadProductoVenta();          
+        }
+        private void btnCliente_Click(object sender, EventArgs e)
+        {
+            _presentadorVenta.BuscarCliente(txtCuit,txtCondicTributaria,txtNombre);
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            _presentadorVenta.AgregarCarrito(txtStock);
+        }
 
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            _presentadorVenta.FinalizarVenta();
         }
     }
 }

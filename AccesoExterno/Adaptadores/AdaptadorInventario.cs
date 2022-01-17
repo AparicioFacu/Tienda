@@ -14,9 +14,20 @@ namespace AccesoExterno.Adaptadores
     public class AdaptadorInventario
     {
         List<Inventario> listInventario;
+        List<Inventario> listInventarioTalleColor;
+        string codigo;
+        string talle;
+        string color;
         public AdaptadorInventario()
         {
             ActulizarProductos();
+        }
+        public AdaptadorInventario(string cod,string color,string talle)
+        {
+            this.codigo = cod;
+            this.talle = talle;
+            this.color = color;
+            ActulizarProductosTalleColor();
         }
         ////GET
         public async void ActulizarProductos()
@@ -35,6 +46,25 @@ namespace AccesoExterno.Adaptadores
         public List<Inventario> GetProductos()
         {
             return listInventario;
+        }
+
+        ////talle y color
+        public async void ActulizarProductosTalleColor()
+        {
+            string respuesta = await GetHttpTalleColor();
+            listInventarioTalleColor = JsonConvert.DeserializeObject<List<Inventario>>(respuesta);
+
+        }
+        private async Task<string> GetHttpTalleColor()
+        {
+            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Inventario?codigo={codigo}&color={color}&talle={talle}");
+            WebResponse oResponse = oRequest.GetResponse();
+            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
+            return await sr.ReadToEndAsync();
+        }
+        public List<Inventario> GetProductoTalleColor()
+        {
+            return listInventarioTalleColor;
         }
 
         ////POST
