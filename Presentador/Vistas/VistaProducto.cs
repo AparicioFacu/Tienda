@@ -23,24 +23,20 @@ namespace Presentador
             _presentador = new PresentadorProducto(this,cbxMarca,cbxRubro,cbxColor,cbxTipoTalle,cbxTalle);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void VistaProducto_Load(object sender, EventArgs e)
         {
-            _presentador.Load(cod, cbxColor, cbxMarca, cbxRubro, cbxTalle,cbxTipoTalle);
+            _presentador.Load();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            _presentador.Agregar(cbxColor, cbxTalle,txtStock);
+        {           
+            panelTalleColor.Visible = true;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-           _presentador.Guardar(txtCodigo,txtCosto,txtDescripcion,txtMargenGanancia,txtPorcentajeIVA,txtPrecioFinal,cbxRubro,cbxMarca, cbxColor, cbxTalle, txtStock, cbxTipoTalle);
+            _presentador.CargarTabla(dataGridView1);
+            _presentador.Guardar(txtCodigo,txtCosto,txtDescripcion,txtMargenGanancia,txtPorcentajeIVA,txtPrecioFinal,cbxRubro,cbxMarca, cbxColor, cbxTalle, txtStock, cbxTipoTalle);          
         }
 
         private void txtPrecioFinal_Click(object sender, EventArgs e)
@@ -56,6 +52,11 @@ namespace Presentador
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             _presentador.BuscarProducto(txtCodigo, txtCosto, txtDescripcion, txtMargenGanancia, txtPorcentajeIVA, txtPrecioFinal, cbxRubro, cbxMarca);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("El producto se Agrego Correctamente");
+            this.Close();
         }
     }
 }

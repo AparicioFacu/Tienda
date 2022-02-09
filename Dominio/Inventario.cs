@@ -8,6 +8,7 @@ namespace Dominio
 {
     public class Inventario
     {
+        public int? Id { get; set; }
         public int StockDisponible { get; set; }
         public Producto Producto { get; set; }
         public Talle Talle { get; set; }

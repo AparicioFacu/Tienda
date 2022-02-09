@@ -1,5 +1,6 @@
 ﻿using AccesoExterno.Adaptadores;
 using Dominio;
+using Presentador.Vistas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,10 @@ namespace Presentador.Presentadores
                 {
                     if(user.Rol == "admin")
                     {
-                        Menu menu = new Menu();
+                        MenuInicio menu = new MenuInicio();
                         menu.Show();
-                    }else if(user.Rol == "vendedor")
+                    }
+                    else if(user.Rol == "vendedor")
                     {
                         //restringir acceso
                     }

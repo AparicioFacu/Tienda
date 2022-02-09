@@ -56,6 +56,7 @@
     <Compile Include="Adaptadores\AdaptadorTalle.cs" />
     <Compile Include="Adaptadores\AdaptadorTipoTalle.cs" />
     <Compile Include="Adaptadores\AdaptadorUsuario.cs" />
+    <Compile Include="Adaptadores\AdaptadorVenta.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ namespace Dominio
         private double _porcentajeIva;
 
         public int Id { get; set; }
-        public int CodigoProducto { get; set; }
+        public string CodigoProducto { get; set; }
         public string Descripcion { get; set; }
         public double Costo { get; set; }
 

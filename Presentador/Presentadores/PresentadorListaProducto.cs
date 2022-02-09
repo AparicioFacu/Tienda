@@ -15,10 +15,10 @@ namespace Presentador.Presentadores
 {
     class PresentadorListaProducto
     {
-        private ListaProducto _vistaListaProducto;
-        private EspecificacionProducto _especificacionProducto;
+        private ListaProducto _vistaListaProducto;       
         private DataGridView tabla;
-        private AdaptadorProducto _adaptadorProducto;       
+        private AdaptadorProducto _adaptadorProducto;
+        private AdaptadorInventario _adaptadorInventario;
 
         public PresentadorListaProducto(ListaProducto vista, DataGridView dgv)
         {
@@ -27,26 +27,21 @@ namespace Presentador.Presentadores
         }
         public void LoadProducto()
         {
-            ActulizarTablaProducto();          
-
-            DataGridViewButtonColumn btngrid = new DataGridViewButtonColumn();
-            btngrid.Name = "Especificaciones";
-            btngrid.HeaderText = "Visualizar Especificaciones";
-            btngrid.Text = "Ver Mas";
-            btngrid.UseColumnTextForButtonValue = true;
-            tabla.Columns.Add(btngrid);
+            ActulizarTablaProducto();                     
         }       
-        public void VerMasProducto(int codigo)
+        public void VerMasProducto(int codigo,DataGridView dgvTalleColor)
         {
-            _especificacionProducto = new EspecificacionProducto(codigo);
-            _especificacionProducto.Show();
-        }
-        public void Agregar()
-        {
-            var cod = 0;
-            var vistaProducto = new VistaProducto(cod);
-            vistaProducto.ShowDialog();
-            ActulizarTablaProducto();
+            _adaptadorInventario = new AdaptadorInventario();
+            List<Inventario> productos = _adaptadorInventario.GetProductos();
+            dgvTalleColor.DataSource = (from inv in productos
+                                where inv.Producto.CodigoProducto == codigo.ToString()
+                                select new
+                                {
+                                    TalleProducto = inv.Talle.Descripcion,
+                                    ColorProducto = inv.Color.Descripcion,
+                                    StockDisponible = inv.StockDisponible
+                                }
+                ).ToList();
         }
 
         public void ActulizarTablaProducto()

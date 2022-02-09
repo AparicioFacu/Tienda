@@ -34,10 +34,11 @@ namespace Presentador.Presentadores
         private ComboBox cbxColor;
         private ComboBox cbxTipoTalle;
         private ComboBox cbxTalle;
+        private DataGridView tablaTalleColor;
 
         //Dominio
         private Producto _producto = new Producto();
-        Inventario _newInventario;
+        private Inventario _newInventario;
 
         public PresentadorProducto(VistaProducto vista, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxColor, ComboBox cbxTipoTalle, ComboBox cbxTalle)
         {           
@@ -50,24 +51,23 @@ namespace Presentador.Presentadores
             _adaptadorSucursal = new AdaptadorSucursal();
         }
 
-        public void Load(int cod, ComboBox cbxColor, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxTalle,ComboBox cbxTipoTalle)
+        public void Load()
         {
             ActulizarCbxMarca();
             ActulizarCbxRubro();
             ActulizarCbxColor();
             ActulizarCbxTipoTalle();
         }
-        public void Agregar(ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock)
+        public void CargarTabla(DataGridView tablaTalleColor)
         {
-           
+            this.tablaTalleColor = tablaTalleColor;
         }
         public void Guardar(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca, ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock, ComboBox cbxTipoTalle)
         {
-            if (!String.IsNullOrEmpty(txtCodigo.Text))
-            {
-
-            }
-            else
+            Producto _newProducto = new Producto();
+            _adaptadorProducto = new AdaptadorProducto(txtCodigo.Text);
+            List<Producto> productos = _adaptadorProducto.GetProducto();
+            if(productos.Count == 0)
             {
                 int idMarca = cbxMarca.SelectedIndex + 1;
                 int idRubro = cbxRubro.SelectedIndex + 1;
@@ -76,8 +76,9 @@ namespace Presentador.Presentadores
                 _marca.Descripcion = cbxMarca.Text;
                 _rubro.Descripcion = cbxRubro.Text;
 
-                Producto _newProducto = new Producto(_marca, _rubro);
-                _newProducto.CodigoProducto = int.Parse(txtCodigo.Text);
+                _newProducto.Marca = _marca;
+                _newProducto.Rubro = _rubro;
+                _newProducto.CodigoProducto = (txtCodigo.Text);
                 _newProducto.Costo = Double.Parse(txtCosto.Text);
                 _newProducto.Descripcion = txtDescripcion.Text;
                 _newProducto.MargenGanancia = Double.Parse(txtMargenGanancia.Text);
@@ -91,66 +92,96 @@ namespace Presentador.Presentadores
                 _adaptadorProducto = new AdaptadorProducto();
                 string urlProducto = "https://localhost:44347/api/Product";
                 _adaptadorProducto.Add<Producto>(urlProducto, _newProducto, "POST");
-
-                int idColor = cbxColor.SelectedIndex + 1;
-                int idTipoTalle = cbxTipoTalle.SelectedIndex + 1;
-                int idTalle = 0;
-
-                if (idTipoTalle == 1)
-                {
-                    idTalle = cbxTalle.SelectedIndex + 7;
-                }
-                if (idTipoTalle == 2)
-                {
-                    idTalle = cbxTalle.SelectedIndex + 1;
-                }
-                if (idTipoTalle == 3)
-                {
-                    idTalle = cbxTalle.SelectedIndex + 17;
-                }
-
-                Talle _talle = new Talle(idTalle);
-                _talle.Descripcion = cbxTalle.Text;
-                TipoTalle _tipoTalle = new TipoTalle(idTipoTalle);
-                _tipoTalle.Descripcion = cbxTipoTalle.Text;
-                Color _color = new Color(idColor);
-                _color.Descripcion = cbxColor.Text;
-                Sucursal _sucursal = new Sucursal();
-
-                _newInventario = new Inventario(_sucursal);
-                _newInventario.Producto = _newProducto;
-                _newInventario.Color = _color;
-                _newInventario.Talle = _talle;
-
-                _adaptadorProducto2 = new AdaptadorProducto();
-
-                List<Sucursal> sucursales = _adaptadorSucursal.GetSucursal();
-                List<Producto> productos = _adaptadorProducto2.GetProductos();
-
-                foreach (var suc in sucursales)
-                {
-                    if (suc.Id == 1)
-                    {
-                        _newInventario.Sucursal.Id = suc.Id;
-                    }
-                }
+                AgregarTalleColorStock(_newProducto, txtCodigo, txtStock);
+                CargarTabla(_newProducto, txtCodigo);
+            }
+            else
+            {
                 foreach (var pro in productos)
                 {
-                    if (pro.CodigoProducto == int.Parse(txtCodigo.Text))
+                    if (pro.CodigoProducto == (txtCodigo.Text))
                     {
-                        _newInventario.Producto.Id = pro.Id;
+                        AgregarTalleColorStock(_newProducto, txtCodigo, txtStock);
+                        CargarTabla(_newProducto, txtCodigo);
                     }
                 }
-                _newInventario.Color.Id = _color.Id;
-                _newInventario.StockDisponible = int.Parse(txtStock.Text);
-                _newInventario.Talle.Id = _talle.Id;
+            }
+            
 
-                _adaptadorInventario = new AdaptadorInventario();
-                string urlInventario = "https://localhost:44347/api/Inventario";
-                _adaptadorInventario.Add<Inventario>(urlInventario, _newInventario, "POST");
-            }          
         }
-      
+        public void CargarTabla(Producto _newProducto, TextBox txtCodigo)
+        {
+                _adaptadorInventario = new AdaptadorInventario();
+                List<Inventario> productos = _adaptadorInventario.GetProductos();
+                var productosPorCodigo = productos.Where(p => p.Producto.CodigoProducto.Contains(txtCodigo.Text)).ToList();
+                tablaTalleColor.DataSource = (from inv in productosPorCodigo
+                                    select new
+                                    {
+                                        TalleProducto = inv.Talle.Descripcion,
+                                        ColorProducto = inv.Color.Descripcion,
+                                        StockDisponible = inv.StockDisponible
+                                    }
+                ).ToList();                      
+        }
+        public void AgregarTalleColorStock(Producto producto, TextBox txtCodigo, TextBox txtStock)
+        {
+            int idColor = cbxColor.SelectedIndex + 1;
+            int idTipoTalle = cbxTipoTalle.SelectedIndex + 1;
+            int idTalle = 0;
+
+            if (idTipoTalle == 1)
+            {
+                idTalle = cbxTalle.SelectedIndex + 7;
+            }
+            if (idTipoTalle == 2)
+            {
+                idTalle = cbxTalle.SelectedIndex + 1;
+            }
+            if (idTipoTalle == 3)
+            {
+                idTalle = cbxTalle.SelectedIndex + 17;
+            }
+
+            Talle _talle = new Talle(idTalle);
+            _talle.Descripcion = cbxTalle.Text;
+            TipoTalle _tipoTalle = new TipoTalle(idTipoTalle);
+            _tipoTalle.Descripcion = cbxTipoTalle.Text;
+            Color _color = new Color(idColor);
+            _color.Descripcion = cbxColor.Text;
+            Sucursal _sucursal = new Sucursal();
+
+            _newInventario = new Inventario(_sucursal);
+            _newInventario.Producto = producto;
+            _newInventario.Color = _color;
+            _newInventario.Talle = _talle;
+
+            _adaptadorProducto2 = new AdaptadorProducto();
+
+            List<Sucursal> sucursales = _adaptadorSucursal.GetSucursal();
+            List<Producto> productos = _adaptadorProducto2.GetProductos();
+
+            foreach (var suc in sucursales)
+            {
+                if (suc.Id == 1)
+                {
+                    _newInventario.Sucursal.Id = suc.Id;
+                }
+            }
+            foreach (var pro in productos)
+            {
+                if (pro.CodigoProducto == (txtCodigo.Text))
+                {
+                    _newInventario.Producto.Id = pro.Id;
+                }
+            }
+            _newInventario.Color.Id = _color.Id;
+            _newInventario.StockDisponible = int.Parse(txtStock.Text);
+            _newInventario.Talle.Id = _talle.Id;
+
+            _adaptadorInventario = new AdaptadorInventario();
+            string urlInventario = "https://localhost:44347/api/Inventario";
+            _adaptadorInventario.Add<Inventario>(urlInventario, _newInventario, "POST");
+        }
         public void CalcularPrecioFinal(TextBox txtMargenGanancia, TextBox txtCosto, TextBox txtPrecioFinal, TextBox txtPorcentajeIVA)
         {
             _producto.Costo = double.Parse(txtCosto.Text);

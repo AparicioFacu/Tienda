@@ -25,25 +25,14 @@ namespace Presentador
         {
             _presentadorLista.LoadProducto();
         }
-
-        private void dvgProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            DataGridViewRow fila = dvgProductos.SelectedRows[0] as DataGridViewRow;
+
+             codigo1 = int.Parse(fila.Cells["Codigo"].Value.ToString());
+             _presentadorLista.VerMasProducto(codigo1, dgvTalleColor);
+             panel1.Visible = true;
             
-                codigo1 = Convert.ToInt32(dvgProductos.Rows[e.RowIndex].Cells[0].Value.ToString());              
-                if (e.ColumnIndex == 7)
-                {
-                    _presentadorLista.VerMasProducto(codigo1);
-                }                   
-        }
-
-        private void btnProducto_Click(object sender, EventArgs e)
-        {
-            _presentadorLista.Agregar();
-        }
-
-        private void dvgProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

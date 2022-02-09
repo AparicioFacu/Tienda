@@ -25,7 +25,8 @@ namespace Presentador
         }
         private void VistaVenta_Load(object sender, EventArgs e)
         {
-            _presentadorVenta.LoadProductoVenta();          
+            _presentadorVenta.LoadProductoVenta();
+            dgvVentas.AllowUserToAddRows = false;
         }
         private void btnCliente_Click(object sender, EventArgs e)
         {
@@ -35,11 +36,14 @@ namespace Presentador
         private void button1_Click(object sender, EventArgs e)
         {
             _presentadorVenta.AgregarCarrito(txtStock);
+            _presentadorVenta.TotalVenta(txtTotal);
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            _presentadorVenta.FinalizarVenta();
+            _presentadorVenta.FinalizarVenta(cbxPago,txtTotal,txtFecha,txtCuit);
+            _presentadorVenta.ImprimirComprobante(txtNumVenta,txtCuit,txtNombre,txtCondicTributaria,dgvVentas,txtTotal);
         }
+
     }
 }
