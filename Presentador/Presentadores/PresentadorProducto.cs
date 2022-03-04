@@ -35,12 +35,13 @@ namespace Presentador.Presentadores
         private ComboBox cbxTipoTalle;
         private ComboBox cbxTalle;
         private DataGridView tablaTalleColor;
+        private int idSucursal;
 
         //Dominio
         private Producto _producto = new Producto();
         private Inventario _newInventario;
 
-        public PresentadorProducto(VistaProducto vista, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxColor, ComboBox cbxTipoTalle, ComboBox cbxTalle)
+        public PresentadorProducto(VistaProducto vista, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxColor, ComboBox cbxTipoTalle, ComboBox cbxTalle,int idSucursal)
         {           
             _vistaProducto = vista;
             this.cbxMarca = cbxMarca;
@@ -48,7 +49,8 @@ namespace Presentador.Presentadores
             this.cbxColor = cbxColor;
             this.cbxTipoTalle = cbxTipoTalle;
             this.cbxTalle = cbxTalle;
-            _adaptadorSucursal = new AdaptadorSucursal();
+            this.idSucursal = idSucursal;
+            _adaptadorSucursal = new AdaptadorSucursal();           
         }
 
         public void Load()
@@ -162,7 +164,7 @@ namespace Presentador.Presentadores
 
             foreach (var suc in sucursales)
             {
-                if (suc.Id == 1)
+                if (suc.Id == idSucursal)
                 {
                     _newInventario.Sucursal.Id = suc.Id;
                 }
@@ -184,12 +186,15 @@ namespace Presentador.Presentadores
         }
         public void CalcularPrecioFinal(TextBox txtMargenGanancia, TextBox txtCosto, TextBox txtPrecioFinal, TextBox txtPorcentajeIVA)
         {
-            _producto.Costo = double.Parse(txtCosto.Text);
-            _producto.MargenGanancia = double.Parse(txtMargenGanancia.Text);
-            _producto.PorcentajeIva = double.Parse(txtPorcentajeIVA.Text);
-            _producto.NetoGravados();
-            _producto.IVA();
-            txtPrecioFinal.Text = _producto.precioFinal().ToString();
+            if(!string.IsNullOrEmpty(txtMargenGanancia.Text) && !string.IsNullOrEmpty(txtCosto.Text) && !string.IsNullOrEmpty(txtPorcentajeIVA.Text))
+            {
+                _producto.Costo = double.Parse(txtCosto.Text);
+                _producto.MargenGanancia = double.Parse(txtMargenGanancia.Text);
+                _producto.PorcentajeIva = double.Parse(txtPorcentajeIVA.Text);
+                _producto.NetoGravados();
+                _producto.IVA();
+                txtPrecioFinal.Text = _producto.precioFinal().ToString();
+            }           
         }
         public void BuscarProducto(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca)
         {

@@ -102,6 +102,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentadores\PresentadorModificarProducto.cs" />
     <Compile Include="Vistas\ListaProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +121,12 @@
     </Compile>
     <Compile Include="Vistas\MenuInicio.Designer.cs">
       <DependentUpon>MenuInicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\VistaModificarProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\VistaModificarProducto.Designer.cs">
+      <DependentUpon>VistaModificarProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\VistaProducto.cs">
       <SubType>Form</SubType>
@@ -151,6 +158,9 @@
     </Compile>
     <EmbeddedResource Include="Vistas\MenuInicio.resx">
       <DependentUpon>MenuInicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\VistaModificarProducto.resx">
+      <DependentUpon>VistaModificarProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\VistaProducto.resx">
       <DependentUpon>VistaProducto.cs</DependentUpon>
@@ -356,6 +366,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Plantilla.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-clothing-store-1001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-tshirt-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-denim-jacket-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,14 +11,20 @@ using System.Runtime.InteropServices;
 using Color = System.Drawing.Color;
 using Presentador.Presentadores;
 using Dominio;
+using Presentador.Vistas;
 
 namespace Presentador
 {
     public partial class FormLogin : Form
     {
+        private MenuInicio menu;
+        private int idSucursal;
+        Random r = new Random();
         public FormLogin()
         {
             InitializeComponent();
+            idSucursal = r.Next(1, 3);
+            //menu = new MenuInicio(idSucursal);
         }
         /*#################################Logica Login###########################################*/
         private void btnLogin_Click(object sender, EventArgs e)
@@ -29,7 +35,7 @@ namespace Presentador
         {
 
             PresentadorLogin _presentador = new PresentadorLogin();                                 
-            _presentador.iniciarSesion(txtUsuario.Text, txtContraseña.Text);
+            _presentador.iniciarSesion(txtUsuario.Text, txtContraseña.Text, idSucursal);
             this.Hide();
             
         }

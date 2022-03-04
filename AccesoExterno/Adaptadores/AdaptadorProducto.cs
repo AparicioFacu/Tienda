@@ -103,6 +103,83 @@ namespace AccesoExterno.Adaptadores
             }
             return result;
         }
+        //PUT
+
+        public string Put<T>(string url, T objectRequest, string method = "PUT")
+        {
+            string result = "";
+
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                //Serializamos el objeto
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(objectRequest);
+                //Peticion
+                WebRequest request = WebRequest.Create(url);
+                //headers
+                request.Method = method;
+                request.PreAuthenticate = true;
+                request.ContentType = "application/json;charset=utf-8'";
+                request.Timeout = 10000; //esto es opcional
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
+
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+            return result;
+        }
+        //DELETE
+        public string Delete<T>(string url, T objectRequest, string method = "DELETE")
+        {
+            string result = "";
+
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                //Serializamos el objeto
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(objectRequest);
+                //Peticion
+                WebRequest request = WebRequest.Create(url);
+                //headers
+                request.Method = method;
+                request.PreAuthenticate = true;
+                request.ContentType = "application/json;charset=utf-8'";
+                request.Timeout = 10000; //esto es opcional
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
+
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+            return result;
+        }
 
     }
 }

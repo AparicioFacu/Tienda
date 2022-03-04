@@ -14,20 +14,30 @@ namespace AccesoExterno.Adaptadores
     public class AdaptadorInventario
     {
         List<Inventario> listInventario;
-        List<Inventario> listInventarioTalleColor;
+        List<Inventario> listProductBuscar;
+        List<Inventario> listProductBuscarPorId;
+        List<Inventario> listProductBuscarSucursal;
         string codigo;
-        string talle;
-        string color;
+        int id;
+        int idSucursal;
         public AdaptadorInventario()
         {
             ActulizarProductos();
         }
-        public AdaptadorInventario(string cod,string color,string talle)
+        public AdaptadorInventario(string cod)
         {
             this.codigo = cod;
-            this.talle = talle;
-            this.color = color;
-            ActulizarProductosTalleColor();
+            ActulizarUnProducto();
+        }
+        public AdaptadorInventario(int? id)
+        {
+            this.id = (int)id;
+            ActulizarUnProductoPorId();
+        }
+        public AdaptadorInventario(int idSucursal)
+        {
+            this.idSucursal = (int)idSucursal;
+            ActulizarUnProductoSucursal();
         }
         ////GET
         public async void ActulizarProductos()
@@ -48,28 +58,144 @@ namespace AccesoExterno.Adaptadores
             return listInventario;
         }
 
-        ////talle y color
-        public async void ActulizarProductosTalleColor()
+        //Get unico
+
+        public async void ActulizarUnProducto()
         {
-            string respuesta = await GetHttpTalleColor();
-            listInventarioTalleColor = JsonConvert.DeserializeObject<List<Inventario>>(respuesta);
+            string respuesta = await GetHttpBuscar();
+            listProductBuscar = JsonConvert.DeserializeObject<List<Inventario>>(respuesta);
 
         }
-        private async Task<string> GetHttpTalleColor()
+        private async Task<string> GetHttpBuscar()
         {
-            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Inventario?codigo={codigo}&color={color}&talle={talle}");
+            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Inventario?codigo={codigo}");
             WebResponse oResponse = oRequest.GetResponse();
             StreamReader sr = new StreamReader(oResponse.GetResponseStream());
             return await sr.ReadToEndAsync();
         }
-        public List<Inventario> GetProductoTalleColor()
+        public List<Inventario> GetProducto()
         {
-            return listInventarioTalleColor;
+            return listProductBuscar;
         }
 
+        //Get unico por id
+
+        public async void ActulizarUnProductoPorId()
+        {
+            string respuesta = await GetHttpBuscarPorId();
+            listProductBuscarPorId = JsonConvert.DeserializeObject<List<Inventario>>(respuesta);
+
+        }
+        private async Task<string> GetHttpBuscarPorId()
+        {
+            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Inventario/{id}");
+            WebResponse oResponse = oRequest.GetResponse();
+            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
+            return await sr.ReadToEndAsync();
+        }
+        public List<Inventario> GetProductoPorId()
+        {
+            return listProductBuscarPorId;
+        }
+        //Get unico por Sucursal
+
+        public async void ActulizarUnProductoSucursal()
+        {
+            string respuesta = await GetHttpBuscarSucursal();
+            listProductBuscarSucursal = JsonConvert.DeserializeObject<List<Inventario>>(respuesta);
+
+        }
+        private async Task<string> GetHttpBuscarSucursal()
+        {
+            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Inventario/{idSucursal}");
+            WebResponse oResponse = oRequest.GetResponse();
+            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
+            return await sr.ReadToEndAsync();
+        }
+        public List<Inventario> GetProductoSucursal()
+        {
+            return listProductBuscarSucursal;
+        }
         ////POST
 
         public string Add<T>(string url, T objectRequest, string method = "POST")
+        {
+            string result = "";
+
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                //Serializamos el objeto
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(objectRequest);
+                //Peticion
+                WebRequest request = WebRequest.Create(url);
+                //headers
+                request.Method = method;
+                request.PreAuthenticate = true;
+                request.ContentType = "application/json;charset=utf-8'";
+                request.Timeout = 10000; //esto es opcional
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
+
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+            return result;
+        }
+
+        //PUT
+        public string Put<T>(string url, T objectRequest, string method = "PUT")
+        {
+            string result = "";
+
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                //Serializamos el objeto
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(objectRequest);
+                //Peticion
+                WebRequest request = WebRequest.Create(url);
+                //headers
+                request.Method = method;
+                request.PreAuthenticate = true;
+                request.ContentType = "application/json;charset=utf-8'";
+                request.Timeout = 10000; //esto es opcional
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                }
+
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+            return result;
+        }
+        //DELETE
+        public string Delete<T>(string url, T objectRequest, string method = "DELETE")
         {
             string result = "";
 

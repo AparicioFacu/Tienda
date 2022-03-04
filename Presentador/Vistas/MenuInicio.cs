@@ -14,23 +14,28 @@ namespace Presentador.Vistas
     public partial class MenuInicio : Form
     {
         Form activarForm = null;
-        public MenuInicio()
+        public static int idSucursal;
+        private PresentadorListaProducto _presentadorListaProducto;
+        public MenuInicio(int idSucursal)
         {
             InitializeComponent();
-            PersonalizarMenu();
+            PersonalizarMenu();           
+            lblSucursal.Text = "Sucursal " + idSucursal;
+            MenuInicio.idSucursal = idSucursal;
         }
+
         private void btnProducto_Click(object sender, EventArgs e)
         {
             MostrarSubMenu(panelSubMenuProducto);
         }
         private void btnListaProducto_Click_1(object sender, EventArgs e)
         {
-            abrirVistar(new ListaProducto());          
+            abriFormulario<ListaProducto>();            
             OcultarSubMenu();
         }
-
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+            //abriFormulario<VistaProducto>();
             abrirVistar(new VistaProducto(0));
             OcultarSubMenu();
         }
@@ -48,13 +53,14 @@ namespace Presentador.Vistas
 
         private void btnRealizarVenta_Click(object sender, EventArgs e)
         {
-            abrirVistar(new VistaVenta());
+            abriFormulario<VistaVenta>();
+            //abrirVistar(new VistaVenta());
             OcultarSubMenu();
         }
 
         private void btnComprobantes_Click(object sender, EventArgs e)
         {
-            MostrarSubMenu(panelSubMenuComprobante);
+            MostrarSubMenu(panelSubMenuCliente);
         }
 
         private void btnListaComprobantes_Click(object sender, EventArgs e)
@@ -74,7 +80,7 @@ namespace Presentador.Vistas
         {
             panelSubMenuProducto.Visible = false;
             panelSubMenuVenta.Visible = false;
-            panelSubMenuComprobante.Visible = false;
+            panelSubMenuCliente.Visible = false;
         }
         void OcultarSubMenu()
         {
@@ -86,9 +92,9 @@ namespace Presentador.Vistas
             {
                 panelSubMenuVenta.Visible = false;
             }
-            if (panelSubMenuComprobante.Visible == true)
+            if (panelSubMenuCliente.Visible == true)
             {
-                panelSubMenuComprobante.Visible = false;
+                panelSubMenuCliente.Visible = false;
             }
         }
         void MostrarSubMenu(Panel subMenu)
@@ -119,6 +125,26 @@ namespace Presentador.Vistas
             panelForm.Tag = formHijo;
             formHijo.BringToFront();
             formHijo.Show();
+        }
+        void abriFormulario<Miform>() where Miform : Form, new()
+        {
+            Form formulario;
+            formulario = panelForm.Controls.OfType<Miform>().FirstOrDefault();
+            if(formulario == null)
+            {
+                formulario = new Miform();
+                formulario.TopLevel = false;
+                formulario.FormBorderStyle = FormBorderStyle.None;
+                formulario.Dock = DockStyle.Fill;
+                panelForm.Controls.Add(formulario);
+                panelForm.Tag = formulario;
+                formulario.Show();
+                formulario.BringToFront();
+            }
+            else
+            {
+                formulario.BringToFront();
+            }
         }
     }
 }

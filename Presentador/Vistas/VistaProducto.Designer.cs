@@ -50,11 +50,9 @@
             this.txtMargenGanancia = new System.Windows.Forms.TextBox();
             this.txtPrecioFinal = new System.Windows.Forms.TextBox();
             this.txtStock = new System.Windows.Forms.TextBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.cbxTipoTalle = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panelTalleColor = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -227,6 +225,7 @@
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(194, 25);
             this.txtCosto.TabIndex = 18;
+            this.txtCosto.TextChanged += new System.EventHandler(this.txtCosto_TextChanged);
             // 
             // txtPorcentajeIVA
             // 
@@ -235,6 +234,7 @@
             this.txtPorcentajeIVA.Name = "txtPorcentajeIVA";
             this.txtPorcentajeIVA.Size = new System.Drawing.Size(194, 25);
             this.txtPorcentajeIVA.TabIndex = 19;
+            this.txtPorcentajeIVA.TextChanged += new System.EventHandler(this.txtPorcentajeIVA_TextChanged);
             // 
             // txtMargenGanancia
             // 
@@ -243,6 +243,7 @@
             this.txtMargenGanancia.Name = "txtMargenGanancia";
             this.txtMargenGanancia.Size = new System.Drawing.Size(194, 25);
             this.txtMargenGanancia.TabIndex = 20;
+            this.txtMargenGanancia.TextChanged += new System.EventHandler(this.txtMargenGanancia_TextChanged);
             // 
             // txtPrecioFinal
             // 
@@ -251,7 +252,6 @@
             this.txtPrecioFinal.Name = "txtPrecioFinal";
             this.txtPrecioFinal.Size = new System.Drawing.Size(194, 25);
             this.txtPrecioFinal.TabIndex = 21;
-            this.txtPrecioFinal.Click += new System.EventHandler(this.txtPrecioFinal_Click);
             // 
             // txtStock
             // 
@@ -260,20 +260,6 @@
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(194, 25);
             this.txtStock.TabIndex = 22;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnAgregar.FlatAppearance.BorderSize = 0;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnAgregar.Location = new System.Drawing.Point(211, 414);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(108, 42);
-            this.btnAgregar.TabIndex = 23;
-            this.btnAgregar.Text = "Agregar TalleColor";
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnGuardar
             // 
@@ -308,26 +294,12 @@
             this.label10.TabIndex = 26;
             this.label10.Text = "TipoTalle";
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnBuscar.FlatAppearance.BorderSize = 0;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnBuscar.Location = new System.Drawing.Point(428, 34);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(108, 42);
-            this.btnBuscar.TabIndex = 27;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 305);
+            this.dataGridView1.Location = new System.Drawing.Point(50, 305);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(392, 139);
+            this.dataGridView1.Size = new System.Drawing.Size(355, 139);
             this.dataGridView1.TabIndex = 28;
             // 
             // panelTalleColor
@@ -346,7 +318,6 @@
             this.panelTalleColor.Name = "panelTalleColor";
             this.panelTalleColor.Size = new System.Drawing.Size(444, 472);
             this.panelTalleColor.TabIndex = 29;
-            this.panelTalleColor.Visible = false;
             // 
             // button1
             // 
@@ -369,8 +340,6 @@
             this.ClientSize = new System.Drawing.Size(1008, 561);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panelTalleColor);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtPrecioFinal);
             this.Controls.Add(this.txtMargenGanancia);
             this.Controls.Add(this.txtPorcentajeIVA);
@@ -421,11 +390,9 @@
         private System.Windows.Forms.TextBox txtMargenGanancia;
         private System.Windows.Forms.TextBox txtPrecioFinal;
         private System.Windows.Forms.TextBox txtStock;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ComboBox cbxTipoTalle;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panelTalleColor;
         private System.Windows.Forms.Button button1;

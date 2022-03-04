@@ -30,9 +30,10 @@ namespace Presentador.Vistas
         private void InitializeComponent()
         {
             this.panelMenuLateral = new System.Windows.Forms.Panel();
-            this.panelSubMenuComprobante = new System.Windows.Forms.Panel();
-            this.btnListaComprobantes = new System.Windows.Forms.Button();
-            this.btnComprobantes = new System.Windows.Forms.Button();
+            this.panelSubMenuCliente = new System.Windows.Forms.Panel();
+            this.btnCliente = new System.Windows.Forms.Button();
+            this.btnListaCliente = new System.Windows.Forms.Button();
+            this.btnClientes = new System.Windows.Forms.Button();
             this.panelSubMenuVenta = new System.Windows.Forms.Panel();
             this.btnRealizarVenta = new System.Windows.Forms.Button();
             this.btnListaVenta = new System.Windows.Forms.Button();
@@ -44,18 +45,22 @@ namespace Presentador.Vistas
             this.btnListaProducto = new System.Windows.Forms.Button();
             this.btnProducto = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelForm = new System.Windows.Forms.Panel();
+            this.lblSucursal = new System.Windows.Forms.Label();
             this.panelMenuLateral.SuspendLayout();
-            this.panelSubMenuComprobante.SuspendLayout();
+            this.panelSubMenuCliente.SuspendLayout();
             this.panelSubMenuVenta.SuspendLayout();
             this.panelSubMenuProducto.SuspendLayout();
+            this.panelLogo.SuspendLayout();
+            this.panelForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenuLateral
             // 
             this.panelMenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.panelMenuLateral.Controls.Add(this.panelSubMenuComprobante);
-            this.panelMenuLateral.Controls.Add(this.btnComprobantes);
+            this.panelMenuLateral.Controls.Add(this.panelSubMenuCliente);
+            this.panelMenuLateral.Controls.Add(this.btnClientes);
             this.panelMenuLateral.Controls.Add(this.panelSubMenuVenta);
             this.panelMenuLateral.Controls.Add(this.btnVenta);
             this.panelMenuLateral.Controls.Add(this.panelSubMenuProducto);
@@ -64,53 +69,69 @@ namespace Presentador.Vistas
             this.panelMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenuLateral.Location = new System.Drawing.Point(0, 0);
             this.panelMenuLateral.Name = "panelMenuLateral";
-            this.panelMenuLateral.Size = new System.Drawing.Size(240, 608);
+            this.panelMenuLateral.Size = new System.Drawing.Size(240, 561);
             this.panelMenuLateral.TabIndex = 1;
             // 
-            // panelSubMenuComprobante
+            // panelSubMenuCliente
             // 
-            this.panelSubMenuComprobante.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
-            this.panelSubMenuComprobante.Controls.Add(this.btnListaComprobantes);
-            this.panelSubMenuComprobante.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuComprobante.Location = new System.Drawing.Point(0, 590);
-            this.panelSubMenuComprobante.Name = "panelSubMenuComprobante";
-            this.panelSubMenuComprobante.Size = new System.Drawing.Size(240, 47);
-            this.panelSubMenuComprobante.TabIndex = 6;
+            this.panelSubMenuCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.panelSubMenuCliente.Controls.Add(this.btnCliente);
+            this.panelSubMenuCliente.Controls.Add(this.btnListaCliente);
+            this.panelSubMenuCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubMenuCliente.Location = new System.Drawing.Point(0, 590);
+            this.panelSubMenuCliente.Name = "panelSubMenuCliente";
+            this.panelSubMenuCliente.Size = new System.Drawing.Size(240, 86);
+            this.panelSubMenuCliente.TabIndex = 6;
             // 
-            // btnListaComprobantes
+            // btnCliente
             // 
-            this.btnListaComprobantes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnListaComprobantes.FlatAppearance.BorderSize = 0;
-            this.btnListaComprobantes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnListaComprobantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnListaComprobantes.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnListaComprobantes.Location = new System.Drawing.Point(0, 0);
-            this.btnListaComprobantes.Name = "btnListaComprobantes";
-            this.btnListaComprobantes.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
-            this.btnListaComprobantes.Size = new System.Drawing.Size(240, 40);
-            this.btnListaComprobantes.TabIndex = 0;
-            this.btnListaComprobantes.Text = "Lista Comprobantes";
-            this.btnListaComprobantes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnListaComprobantes.UseVisualStyleBackColor = true;
-            this.btnListaComprobantes.Click += new System.EventHandler(this.btnListaComprobantes_Click);
+            this.btnCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCliente.FlatAppearance.BorderSize = 0;
+            this.btnCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCliente.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnCliente.Location = new System.Drawing.Point(0, 40);
+            this.btnCliente.Name = "btnCliente";
+            this.btnCliente.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.btnCliente.Size = new System.Drawing.Size(240, 40);
+            this.btnCliente.TabIndex = 1;
+            this.btnCliente.Text = "Agregar Cliente";
+            this.btnCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCliente.UseVisualStyleBackColor = true;
             // 
-            // btnComprobantes
+            // btnListaCliente
             // 
-            this.btnComprobantes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.btnComprobantes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnComprobantes.FlatAppearance.BorderSize = 0;
-            this.btnComprobantes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnComprobantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComprobantes.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btnComprobantes.Location = new System.Drawing.Point(0, 530);
-            this.btnComprobantes.Name = "btnComprobantes";
-            this.btnComprobantes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnComprobantes.Size = new System.Drawing.Size(240, 60);
-            this.btnComprobantes.TabIndex = 5;
-            this.btnComprobantes.Text = "Comprobantes";
-            this.btnComprobantes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnComprobantes.UseVisualStyleBackColor = false;
-            this.btnComprobantes.Click += new System.EventHandler(this.btnComprobantes_Click);
+            this.btnListaCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnListaCliente.FlatAppearance.BorderSize = 0;
+            this.btnListaCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListaCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListaCliente.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnListaCliente.Location = new System.Drawing.Point(0, 0);
+            this.btnListaCliente.Name = "btnListaCliente";
+            this.btnListaCliente.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
+            this.btnListaCliente.Size = new System.Drawing.Size(240, 40);
+            this.btnListaCliente.TabIndex = 0;
+            this.btnListaCliente.Text = "Lista Clientes";
+            this.btnListaCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnListaCliente.UseVisualStyleBackColor = true;
+            // 
+            // btnClientes
+            // 
+            this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.btnClientes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnClientes.FlatAppearance.BorderSize = 0;
+            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClientes.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnClientes.Location = new System.Drawing.Point(0, 530);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnClientes.Size = new System.Drawing.Size(240, 60);
+            this.btnClientes.TabIndex = 5;
+            this.btnClientes.Text = "Clientes";
+            this.btnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClientes.UseVisualStyleBackColor = false;
+            this.btnClientes.Click += new System.EventHandler(this.btnComprobantes_Click);
             // 
             // panelSubMenuVenta
             // 
@@ -165,6 +186,7 @@ namespace Presentador.Vistas
             this.btnVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVenta.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnVenta.Image = global::Presentador.Properties.Resources.productos;
             this.btnVenta.Location = new System.Drawing.Point(0, 384);
             this.btnVenta.Name = "btnVenta";
             this.btnVenta.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
@@ -275,35 +297,62 @@ namespace Presentador.Vistas
             // panelLogo
             // 
             this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.panelLogo.Controls.Add(this.button1);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(240, 154);
             this.panelLogo.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::Presentador.Properties.Resources.icons8_clothing_store_100;
+            this.button1.Location = new System.Drawing.Point(47, 33);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 100);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // panelForm
             // 
             this.panelForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.panelForm.Controls.Add(this.lblSucursal);
             this.panelForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelForm.Location = new System.Drawing.Point(240, 0);
             this.panelForm.Name = "panelForm";
-            this.panelForm.Size = new System.Drawing.Size(1024, 608);
+            this.panelForm.Size = new System.Drawing.Size(1024, 561);
             this.panelForm.TabIndex = 2;
+            // 
+            // lblSucursal
+            // 
+            this.lblSucursal.AutoSize = true;
+            this.lblSucursal.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSucursal.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.lblSucursal.Location = new System.Drawing.Point(303, 227);
+            this.lblSucursal.Name = "lblSucursal";
+            this.lblSucursal.Size = new System.Drawing.Size(293, 76);
+            this.lblSucursal.TabIndex = 0;
+            this.lblSucursal.Text = "Sucursal";
             // 
             // MenuInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 608);
+            this.ClientSize = new System.Drawing.Size(1264, 561);
             this.Controls.Add(this.panelForm);
             this.Controls.Add(this.panelMenuLateral);
             this.Name = "MenuInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuInicio";
             this.panelMenuLateral.ResumeLayout(false);
-            this.panelSubMenuComprobante.ResumeLayout(false);
+            this.panelSubMenuCliente.ResumeLayout(false);
             this.panelSubMenuVenta.ResumeLayout(false);
             this.panelSubMenuProducto.ResumeLayout(false);
+            this.panelLogo.ResumeLayout(false);
+            this.panelForm.ResumeLayout(false);
+            this.panelForm.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -311,9 +360,7 @@ namespace Presentador.Vistas
         #endregion
 
         private System.Windows.Forms.Panel panelMenuLateral;
-        private System.Windows.Forms.Panel panelSubMenuComprobante;
-        private System.Windows.Forms.Button btnListaComprobantes;
-        private System.Windows.Forms.Button btnComprobantes;
+        private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Panel panelSubMenuVenta;
         private System.Windows.Forms.Button btnRealizarVenta;
         private System.Windows.Forms.Button btnListaVenta;
@@ -325,6 +372,11 @@ namespace Presentador.Vistas
         private System.Windows.Forms.Button btnListaProducto;
         private System.Windows.Forms.Button btnProducto;
         private System.Windows.Forms.Panel panelLogo;
-        private System.Windows.Forms.Panel panelForm;
+        private System.Windows.Forms.Panel panelSubMenuCliente;
+        private System.Windows.Forms.Button btnCliente;
+        private System.Windows.Forms.Button btnListaCliente;
+        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Panel panelForm;
+        private System.Windows.Forms.Label lblSucursal;
     }
 }

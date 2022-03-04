@@ -19,47 +19,83 @@ namespace Presentador.Presentadores
         private DataGridView tabla;
         private AdaptadorProducto _adaptadorProducto;
         private AdaptadorInventario _adaptadorInventario;
-
-        public PresentadorListaProducto(ListaProducto vista, DataGridView dgv)
+        int idSucursal;
+        public PresentadorListaProducto()
+        {
+        }
+        public PresentadorListaProducto(ListaProducto vista, DataGridView dgv,int idSucursal)
         {
             _vistaListaProducto = vista;
             tabla = dgv;
+            this.idSucursal = idSucursal;
         }
         public void LoadProducto()
         {
             ActulizarTablaProducto();                     
-        }       
-        public void VerMasProducto(int codigo,DataGridView dgvTalleColor)
-        {
-            _adaptadorInventario = new AdaptadorInventario();
-            List<Inventario> productos = _adaptadorInventario.GetProductos();
-            dgvTalleColor.DataSource = (from inv in productos
-                                where inv.Producto.CodigoProducto == codigo.ToString()
-                                select new
-                                {
-                                    TalleProducto = inv.Talle.Descripcion,
-                                    ColorProducto = inv.Color.Descripcion,
-                                    StockDisponible = inv.StockDisponible
-                                }
-                ).ToList();
-        }
-
+        }             
         public void ActulizarTablaProducto()
         {
-            _adaptadorProducto = new AdaptadorProducto();           
-            List<Producto> productos = _adaptadorProducto.GetProductos();            
-            tabla.DataSource = (from prod in productos
+            _adaptadorInventario = new AdaptadorInventario();
+            List<Inventario> inventario = _adaptadorInventario.GetProductos();
+            tabla.DataSource = (from prod in inventario
+                                where prod.Sucursal.Id == idSucursal
                                 select new
                                 {
-                                    Codigo = prod.CodigoProducto,
-                                    Descripcion = prod.Descripcion,
-                                    Costo = prod.Costo,
-                                    PorcentajeIva = prod.PorcentajeIva,
-                                    NombreMarca = prod.Marca.Descripcion,
-                                    NombreRubro = prod.Rubro.Descripcion,
-                                    PrecioVenta = prod.PrecioVenta
+                                    Codigo = prod.Producto.CodigoProducto,
+                                    Descripcion = prod.Producto.Descripcion,
+                                    Costo = prod.Producto.Costo,
+                                    PorcentajeIva = prod.Producto.PorcentajeIva,
+                                    NombreMarca = prod.Producto.Marca.Descripcion,
+                                    NombreRubro = prod.Producto.Rubro.Descripcion,
+                                    PrecioVenta = prod.Producto.PrecioVenta
                                 }
-                ).ToList();
-        }       
+                ).Distinct().ToList();           
+        }
+        public void BuscarProducto(TextBox codigo)
+        {
+            if (codigo.Text.Length==0)
+            {
+                ActulizarTablaProducto();
+            }
+            else
+            {
+                _adaptadorInventario = new AdaptadorInventario();
+                List<Inventario> inventario = _adaptadorInventario.GetProductos();
+                tabla.DataSource = (from prod in inventario
+                                    where prod.Sucursal.Id == idSucursal
+                                    where prod.Producto.CodigoProducto == codigo.Text
+                                    select new
+                                    {
+                                        Codigo = prod.Producto.CodigoProducto,
+                                        Descripcion = prod.Producto.Descripcion,
+                                        Costo = prod.Producto.Costo,
+                                        PorcentajeIva = prod.Producto.PorcentajeIva,
+                                        NombreMarca = prod.Producto.Marca.Descripcion,
+                                        NombreRubro = prod.Producto.Rubro.Descripcion,
+                                        PrecioVenta = prod.Producto.PrecioVenta
+                                    }
+                    ).Distinct().ToList();
+            }            
+        }
+        public void EliminarProducto(int codigo)
+        {
+            _adaptadorInventario = new AdaptadorInventario(codigo.ToString());
+            List<Inventario> inventario = _adaptadorInventario.GetProducto();
+            foreach (var inv in inventario)
+            {
+                string urlInventario = "https://localhost:44347/api/Inventario";
+                _adaptadorInventario = new AdaptadorInventario();
+                _adaptadorInventario.Delete<Inventario>(urlInventario, inv, "DELETE");
+            }
+            _adaptadorProducto = new AdaptadorProducto(codigo.ToString());
+            List<Producto> producto = _adaptadorProducto.GetProducto();
+            foreach (var pro in producto)
+            {
+                string urlProducto = "https://localhost:44347/api/Product";
+                _adaptadorProducto = new AdaptadorProducto();
+                _adaptadorProducto.Delete<Producto>(urlProducto, pro, "DELETE");
+            }
+            ActulizarTablaProducto();
+        }
     }
 }

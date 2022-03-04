@@ -14,7 +14,7 @@ namespace Presentador.Presentadores
     {
         AdaptadorUsuario AdaptadorUsuario = new AdaptadorUsuario();
         List<Usuario> usuarios;
-        public void iniciarSesion(string nombre, string contraseña)
+        public void iniciarSesion(string nombre, string contraseña,int idSucursal)
         {
             usuarios = AdaptadorUsuario.GetUsuarios();
             foreach(var user in usuarios)
@@ -23,7 +23,7 @@ namespace Presentador.Presentadores
                 {
                     if(user.Rol == "admin")
                     {
-                        MenuInicio menu = new MenuInicio();
+                        MenuInicio menu = new MenuInicio(idSucursal);
                         menu.Show();
                     }
                     else if(user.Rol == "vendedor")

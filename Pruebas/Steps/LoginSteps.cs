@@ -25,10 +25,10 @@ namespace Pruebas.Steps
         {
             PresentadorLogin login = new PresentadorLogin();
 #pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-            user.nombre = legajo.ToString();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
-            user.contraseña = contraseña.ToString();
-            respuesta = login.iniciarSesion(user);
+//            user.nombre = legajo.ToString();
+//#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
+//            user.contraseña = contraseña.ToString();
+//            respuesta = login.iniciarSesion(user);
         }
 
         [Then(@"el inicio de sesión ""(.*)""")]

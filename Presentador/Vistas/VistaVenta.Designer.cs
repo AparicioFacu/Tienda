@@ -30,7 +30,7 @@ namespace Presentador
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VistaVenta));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@ namespace Presentador
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.txtFecha = new System.Windows.Forms.DateTimePicker();
+            this.txtFecha = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,6 +76,9 @@ namespace Presentador
             this.button2 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
+            this.panelCliente = new System.Windows.Forms.Panel();
+            this.btnAgregarCliente = new System.Windows.Forms.Button();
+            this.btnCrearCliente = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -86,6 +89,7 @@ namespace Presentador
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             this.panel7.SuspendLayout();
+            this.panelCliente.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -140,7 +144,6 @@ namespace Presentador
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.Size = new System.Drawing.Size(539, 168);
             this.dgvProductos.TabIndex = 4;
-           
             // 
             // txtBuscar
             // 
@@ -148,6 +151,7 @@ namespace Presentador
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(100, 20);
             this.txtBuscar.TabIndex = 3;
+            this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
             // panel2
             // 
@@ -209,10 +213,10 @@ namespace Presentador
             // 
             // txtFecha
             // 
-            this.txtFecha.Enabled = false;
-            this.txtFecha.Location = new System.Drawing.Point(72, 51);
+            this.txtFecha.BackColor = System.Drawing.Color.DarkGray;
+            this.txtFecha.Location = new System.Drawing.Point(67, 51);
             this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(82, 20);
+            this.txtFecha.Size = new System.Drawing.Size(101, 20);
             this.txtFecha.TabIndex = 24;
             // 
             // txtNombre
@@ -420,9 +424,9 @@ namespace Presentador
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(608, 12);
+            this.panel4.Location = new System.Drawing.Point(608, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(391, 34);
+            this.panel4.Size = new System.Drawing.Size(388, 34);
             this.panel4.TabIndex = 4;
             // 
             // label5
@@ -450,14 +454,14 @@ namespace Presentador
             // 
             // dgvVentas
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
@@ -542,12 +546,50 @@ namespace Presentador
             this.label11.Text = "Carrito";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panelCliente
+            // 
+            this.panelCliente.Controls.Add(this.btnCrearCliente);
+            this.panelCliente.Controls.Add(this.btnAgregarCliente);
+            this.panelCliente.Location = new System.Drawing.Point(608, 124);
+            this.panelCliente.Name = "panelCliente";
+            this.panelCliente.Size = new System.Drawing.Size(388, 87);
+            this.panelCliente.TabIndex = 20;
+            // 
+            // btnAgregarCliente
+            // 
+            this.btnAgregarCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.btnAgregarCliente.FlatAppearance.BorderSize = 0;
+            this.btnAgregarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarCliente.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnAgregarCliente.Location = new System.Drawing.Point(31, 29);
+            this.btnAgregarCliente.Name = "btnAgregarCliente";
+            this.btnAgregarCliente.Size = new System.Drawing.Size(137, 35);
+            this.btnAgregarCliente.TabIndex = 20;
+            this.btnAgregarCliente.Text = "Agregar Cliente";
+            this.btnAgregarCliente.UseVisualStyleBackColor = false;
+            this.btnAgregarCliente.Click += new System.EventHandler(this.btnAgregarCliente_Click);
+            // 
+            // btnCrearCliente
+            // 
+            this.btnCrearCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.btnCrearCliente.FlatAppearance.BorderSize = 0;
+            this.btnCrearCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearCliente.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.btnCrearCliente.Location = new System.Drawing.Point(221, 29);
+            this.btnCrearCliente.Name = "btnCrearCliente";
+            this.btnCrearCliente.Size = new System.Drawing.Size(137, 35);
+            this.btnCrearCliente.TabIndex = 21;
+            this.btnCrearCliente.Text = "Crear Cliente";
+            this.btnCrearCliente.UseVisualStyleBackColor = false;
+            this.btnCrearCliente.Click += new System.EventHandler(this.btnCrearCliente_Click);
+            // 
             // VistaVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.Controls.Add(this.panelCliente);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -567,6 +609,7 @@ namespace Presentador
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
             this.panel7.ResumeLayout(false);
+            this.panelCliente.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -607,7 +650,6 @@ namespace Presentador
         private System.Windows.Forms.ComboBox cbxPago;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker txtFecha;
         public System.Windows.Forms.DataGridView dgvVentas;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label label14;
@@ -618,5 +660,9 @@ namespace Presentador
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubTotal;
+        private System.Windows.Forms.TextBox txtFecha;
+        private System.Windows.Forms.Panel panelCliente;
+        private System.Windows.Forms.Button btnCrearCliente;
+        private System.Windows.Forms.Button btnAgregarCliente;
     }
 }
