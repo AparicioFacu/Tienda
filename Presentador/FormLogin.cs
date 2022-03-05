@@ -17,7 +17,6 @@ namespace Presentador
 {
     public partial class FormLogin : Form
     {
-        private MenuInicio menu;
         private int idSucursal;
         Random r = new Random();
         public FormLogin()

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adaptadores\Adaptador.cs" />
     <Compile Include="Adaptadores\AdaptadorCliente.cs" />
     <Compile Include="Adaptadores\AdaptadorColor.cs" />
     <Compile Include="Adaptadores\AdaptadorInventario.cs" />

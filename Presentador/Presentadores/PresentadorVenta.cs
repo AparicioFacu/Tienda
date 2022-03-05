@@ -159,13 +159,11 @@ namespace Presentador.Presentadores
             SolicitarAutorizacion();
             ultimoComprobante = FECompUltimoAutorizado() + 1;
             txtNumVenta.Text = ultimoComprobante.ToString();
-            FECAESolicitar(txtCuit,txtTotal,txtFecha,_comprobante.Id);
-            string urlVenta = "https://localhost:44347/api/Venta";
+            FECAESolicitar(txtCuit,txtTotal,txtFecha,_comprobante.Id);           
             _adaptadorVenta = new AdaptadorVenta();
-            _adaptadorVenta.Add<Venta>(urlVenta, _venta, "POST");
+            _adaptadorVenta.Post(_venta);
             modificarStock(_inventarios);
         }
-
         public void AgregarLineaVenta(TextBox txtStock)
         {
             
@@ -210,9 +208,8 @@ namespace Presentador.Presentadores
         {
             foreach (var inv in newInventario)
             {
-                string urlInventario = "https://localhost:44347/api/Inventario";
                 _adaptadorInventario = new AdaptadorInventario();
-                _adaptadorInventario.Add<Inventario>(urlInventario, inv, "PUT");
+                _adaptadorInventario.Put(inv);
             }
 
         }
@@ -257,7 +254,6 @@ namespace Presentador.Presentadores
                                                   ).Distinct().ToList();
             }
         }
-
         public void SolicitarAutorizacion()
         {
             var GUID = "44B486BA-F7BA-4C11-9877-1C142F59179C";

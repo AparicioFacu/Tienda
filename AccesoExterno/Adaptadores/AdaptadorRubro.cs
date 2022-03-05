@@ -10,31 +10,16 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorRubro
+    public class AdaptadorRubro :Adaptador<Rubro>
     {
-        List<Rubro> listRubro;
+        string url = "https://localhost:44347/api/Rubro";
         public AdaptadorRubro()
         {
-            ActulizarRubro();
+            
         }
-
-        public async void ActulizarRubro()
-        {
-            string respuesta = await GetHttp();
-            listRubro = JsonConvert.DeserializeObject<List<Rubro>>(respuesta);
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/Rubro");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
         public List<Rubro> GetRubros()
         {
-            return listRubro;
+            return base.Get(url);
         }
     }
 }

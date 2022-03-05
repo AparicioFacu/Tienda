@@ -15,7 +15,6 @@ namespace Presentador.Vistas
     {
         Form activarForm = null;
         public static int idSucursal;
-        private PresentadorListaProducto _presentadorListaProducto;
         public MenuInicio(int idSucursal)
         {
             InitializeComponent();

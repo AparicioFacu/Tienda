@@ -82,18 +82,16 @@ namespace Presentador.Presentadores
             _adaptadorInventario = new AdaptadorInventario(codigo.ToString());
             List<Inventario> inventario = _adaptadorInventario.GetProducto();
             foreach (var inv in inventario)
-            {
-                string urlInventario = "https://localhost:44347/api/Inventario";
+            {                
                 _adaptadorInventario = new AdaptadorInventario();
-                _adaptadorInventario.Delete<Inventario>(urlInventario, inv, "DELETE");
+                _adaptadorInventario.Delete(inv);
             }
             _adaptadorProducto = new AdaptadorProducto(codigo.ToString());
             List<Producto> producto = _adaptadorProducto.GetProducto();
             foreach (var pro in producto)
-            {
-                string urlProducto = "https://localhost:44347/api/Product";
+            {               
                 _adaptadorProducto = new AdaptadorProducto();
-                _adaptadorProducto.Delete<Producto>(urlProducto, pro, "DELETE");
+                _adaptadorProducto.Delete(pro);
             }
             ActulizarTablaProducto();
         }

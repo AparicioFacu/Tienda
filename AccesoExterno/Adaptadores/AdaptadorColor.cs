@@ -10,31 +10,17 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorColor
+    public class AdaptadorColor:Adaptador<Color>
     {
-        List<Color> listColor;
+        string url = "https://localhost:44347/api/Color";
 
         public AdaptadorColor()
         {
-            ActulizarColor();
-        }
-        public async void ActulizarColor()
-        {
-            string respuesta = await GetHttp();
-            listColor = JsonConvert.DeserializeObject<List<Color>>(respuesta);
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/Color");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
+            
+        }       
         public List<Color> GetColor()
         {
-            return listColor;
+            return base.Get(url);
         }
     }
 }

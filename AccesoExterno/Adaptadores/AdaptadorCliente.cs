@@ -10,58 +10,24 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorCliente
+    public class AdaptadorCliente : Adaptador<Cliente>
     {
-        List<Cliente> listCliente;
-        List<Cliente> listClienteBuscar;
+        string url = "https://localhost:44347/api/Cliente";
         string cuit;
         public AdaptadorCliente()
-        {
-            ActulizarCliente();
+        {            
         }
-
         public AdaptadorCliente(string cuit)
         {
-            this.cuit = cuit;
-            ActulizarClienteUnico();
-        }
-        public async void ActulizarCliente()
-        {
-            string respuesta = await GetHttp();
-            listCliente = JsonConvert.DeserializeObject<List<Cliente>>(respuesta);
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/Cliente");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
+            this.cuit = cuit;           
+        }      
         public List<Cliente> GetClientes()
         {
-            return listCliente;
-        }
-
-        /// GET Unico                
-        public async void ActulizarClienteUnico()
-        {
-            string respuesta = await GetHttpUnico();
-            listClienteBuscar = JsonConvert.DeserializeObject<List<Cliente>>(respuesta);
-        }
-
-        private async Task<string> GetHttpUnico()
-        {
-            WebRequest oRequest = WebRequest.Create($"https://localhost:44347/api/Cliente?cuit={cuit}");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
+            return base.Get(url);
+        }                             
         public List<Cliente> GetCliente()
         {
-            return listClienteBuscar;
+            return base.GetUnico($"https://localhost:44347/api/Cliente?cuit={cuit}");
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Presentador.Presentadores
             this.idSucursal = idSucursal;
             _adaptadorSucursal = new AdaptadorSucursal();
         }
-
         public void Load(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, TextBox txtStock, ComboBox cbxColor, ComboBox cbxMarca, ComboBox cbxRubro, ComboBox cbxTalle, ComboBox cbxTipoTalle, DataGridView dgvTalleColor)
         {
             ActulizarCbxMarca(cbxMarca);
@@ -47,7 +46,6 @@ namespace Presentador.Presentadores
             BuscarProducto(txtCodigo, txtCosto, txtDescripcion, txtMargenGanancia, txtPorcentajeIVA, txtPrecioFinal, cbxRubro, cbxMarca);
             TalleColor(codigo, dgvTalleColor);            
         }
-
         public void BuscarProducto(TextBox txtCodigo, TextBox txtCosto, TextBox txtDescripcion, TextBox txtMargenGanancia, TextBox txtPorcentajeIVA, TextBox txtPrecioFinal, ComboBox cbxRubro, ComboBox cbxMarca)
         {
             _adaptadorBuscarProducto = new AdaptadorProducto(txtCodigo.Text);
@@ -94,13 +92,11 @@ namespace Presentador.Presentadores
             }
             foreach (var pro in productos)
             {
-                string urlProducto = "https://localhost:44347/api/Product";
                 _adaptadorProducto = new AdaptadorProducto();
-                _adaptadorInventario.Put<Producto>(urlProducto, pro, "PUT");
+                _adaptadorProducto.Put(pro);
             }
             
-        }
-        
+        }      
         public void Agregar(TextBox txtCodigo, ComboBox cbxColor, ComboBox cbxTalle, TextBox txtStock, ComboBox cbxTipoTalle, DataGridView dgvTalleColor)
         {
             int idColor = cbxColor.SelectedIndex + 1;
@@ -158,8 +154,7 @@ namespace Presentador.Presentadores
             _newInventario.Talle.Id = _talle.Id;
 
             _adaptadorInventario = new AdaptadorInventario();
-            string urlInventario = "https://localhost:44347/api/Inventario";
-            _adaptadorInventario.Add<Inventario>(urlInventario, _newInventario, "POST");
+            _adaptadorInventario.Post(_newInventario);
             TalleColor(codigo, dgvTalleColor);
 
         }
@@ -169,9 +164,8 @@ namespace Presentador.Presentadores
             List<Inventario> inventario = _adaptadorInventario.GetProducto();
             foreach (var inv in inventario)
             {
-                string urlInventario = "https://localhost:44347/api/Inventario";
                 _adaptadorInventario = new AdaptadorInventario();
-                _adaptadorInventario.Delete<Inventario>(urlInventario, inv, "DELETE");
+                _adaptadorInventario.Delete(inv);
             }
             TalleColor(int.Parse(codigo.Text), dgvTalleColor);
         }
@@ -194,7 +188,6 @@ namespace Presentador.Presentadores
             cbxMarca.ValueMember = "Id";
             cbxMarca.DisplayMember = "descripcion";
         }
-
         public void ActulizarCbxRubro(ComboBox cbxRubro)
         {
             _adaptadorRubro = new AdaptadorRubro();
@@ -202,7 +195,6 @@ namespace Presentador.Presentadores
             cbxRubro.ValueMember = "Id";
             cbxRubro.DisplayMember = "descripcion";
         }
-
         public void ActulizarCbxColor(ComboBox cbxColor)
         {
             _adaptadorColor = new AdaptadorColor();

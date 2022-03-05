@@ -10,31 +10,16 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorSucursal
+    public class AdaptadorSucursal : Adaptador<Sucursal>
     {
-        List<Sucursal> listSucursal;
+        string url = "https://localhost:44347/api/Sucursal";
         public AdaptadorSucursal()
         {
-            ActulizarSucursal();
+            
         }
-
-        public async void ActulizarSucursal()
-        {
-            string respuesta = await GetHttp();
-            listSucursal = JsonConvert.DeserializeObject<List<Sucursal>>(respuesta);
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/Sucursal");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
         public List<Sucursal> GetSucursal()
         {
-            return listSucursal;
+            return base.Get(url);
         }
     }
 }

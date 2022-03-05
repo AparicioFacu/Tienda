@@ -10,31 +10,16 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorTipoTalle
+    public class AdaptadorTipoTalle : Adaptador<TipoTalle>
     {
-        List<TipoTalle> listTipoTalle;
+        string url = "https://localhost:44347/api/TipoTalle";
         public AdaptadorTipoTalle()
         {
-            ActulizarTipoTalle();
+            
         }
-
-        public async void ActulizarTipoTalle()
-        {
-            string respuesta = await GetHttp();
-            listTipoTalle = JsonConvert.DeserializeObject<List<TipoTalle>>(respuesta);
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/TipoTalle");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
         public List<TipoTalle> GetTipoTalle()
         {
-            return listTipoTalle;
+            return base.Get(url);
         }
     }
 }

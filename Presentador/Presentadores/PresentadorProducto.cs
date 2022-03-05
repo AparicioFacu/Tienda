@@ -92,8 +92,7 @@ namespace Presentador.Presentadores
                 _newProducto.Rubro.Id = _rubro.Id;
 
                 _adaptadorProducto = new AdaptadorProducto();
-                string urlProducto = "https://localhost:44347/api/Product";
-                _adaptadorProducto.Add<Producto>(urlProducto, _newProducto, "POST");
+                _adaptadorProducto.Post(_newProducto);
                 AgregarTalleColorStock(_newProducto, txtCodigo, txtStock);
                 CargarTabla(_newProducto, txtCodigo);
             }
@@ -181,8 +180,7 @@ namespace Presentador.Presentadores
             _newInventario.Talle.Id = _talle.Id;
 
             _adaptadorInventario = new AdaptadorInventario();
-            string urlInventario = "https://localhost:44347/api/Inventario";
-            _adaptadorInventario.Add<Inventario>(urlInventario, _newInventario, "POST");
+            _adaptadorInventario.Post(_newInventario);
         }
         public void CalcularPrecioFinal(TextBox txtMargenGanancia, TextBox txtCosto, TextBox txtPrecioFinal, TextBox txtPorcentajeIVA)
         {
@@ -224,7 +222,6 @@ namespace Presentador.Presentadores
             cbxMarca.ValueMember = "Id";
             cbxMarca.DisplayMember = "descripcion";
         }
-
         public void ActulizarCbxRubro()
         {
             _adaptadorRubro = new AdaptadorRubro();
@@ -232,7 +229,6 @@ namespace Presentador.Presentadores
             cbxRubro.ValueMember = "Id";
             cbxRubro.DisplayMember = "descripcion";
         }
-
         public void ActulizarCbxColor()
         {
             _adaptadorColor = new AdaptadorColor();

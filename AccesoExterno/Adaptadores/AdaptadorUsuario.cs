@@ -10,31 +10,18 @@ using System.Threading.Tasks;
 
 namespace AccesoExterno.Adaptadores
 {
-    public class AdaptadorUsuario
+    public class AdaptadorUsuario : Adaptador<Usuario>
     {
-        List<Usuario> listUsuario;  
-        
+        string url = "https://localhost:44347/api/Usuario";
+
+
         public AdaptadorUsuario()
         {
-            ActulizarUsuarios();
+            
         }
-        public async void ActulizarUsuarios()
-        {
-            string respuesta = await GetHttp();
-            listUsuario = JsonConvert.DeserializeObject<List<Usuario>>(respuesta);            
-        }
-
-        private async Task<string> GetHttp()
-        {
-            WebRequest oRequest = WebRequest.Create("https://localhost:44347/api/Usuario");
-            WebResponse oResponse = oRequest.GetResponse();
-            StreamReader sr = new StreamReader(oResponse.GetResponseStream());
-            return await sr.ReadToEndAsync();
-        }
-
         public List<Usuario> GetUsuarios()
         {
-            return listUsuario;
+            return base.Get(url);
         }
     }
 }
